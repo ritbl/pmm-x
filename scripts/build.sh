@@ -2,7 +2,7 @@
 set -o errexit
 set -o xtrace
 
-export GOARCH=arm64
+export GOARCH=amd64
 export GOOS=linux
 
 cd ./deps/VictoriaMetrics/app/victoria-metrics
