@@ -44,6 +44,7 @@ docker buildx build --push --platform=linux/amd64,linux/arm64 --tag=ritbl/pmm-x:
 
 ## Build Troubleshooting 
 
+#### Mac/Win:
 Check if you have enough space in docker vm:
 
 ```yaml
