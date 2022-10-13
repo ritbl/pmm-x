@@ -16,6 +16,28 @@ COPY deps/grafana/.bingo .bingo
 RUN go mod verify
 RUN make build-go
 
+FROM node:16-alpine3.15 as grafana-front-builder
+
+ENV NODE_OPTIONS="--max_old_space_size=8000"
+
+WORKDIR /grafana
+
+COPY deps/grafana/package.json deps/grafana/yarn.lock deps/grafana/.yarnrc.yml ./
+COPY deps/grafana/.yarn .yarn
+COPY deps/grafana/packages packages
+COPY deps/grafana/plugins-bundled plugins-bundled
+
+RUN yarn install
+
+COPY deps/grafana/tsconfig.json deps/grafana/.eslintrc deps/grafana/.editorconfig deps/grafana/.browserslistrc deps/grafana/.prettierrc.js deps/grafana/babel.config.json deps/grafana/.linguirc ./
+COPY deps/grafana/public public
+COPY deps/grafana/tools tools
+COPY deps/grafana/scripts scripts
+COPY deps/grafana/emails emails
+
+ENV NODE_ENV production
+RUN yarn build
+
 FROM golang:1.19.2-bullseye as pmm-builder
 
 RUN apt install -y gcc g++ make
@@ -41,11 +63,11 @@ RUN apt-get update && apt-get install -y \
 # grafana
 RUN adduser grafana
 RUN mkdir -p /usr/share/grafana/data
-COPY ./deps/grafana/conf /usr/share/grafana/conf
-COPY ./deps/grafana/public /usr/share/grafana/public
-COPY ./deps/grafana/scripts /usr/share/grafana/scripts
-COPY ./deps/grafana/tools /usr/share/grafana/tools
+COPY --from=grafana-front-builder /grafana/public /usr/share/grafana/public
+COPY --from=grafana-front-builder /grafana/tools /usr/share/grafana/tools
 COPY --from=grafana-back-builder /grafana/bin/*/grafana-server /usr/sbin/grafana-server
+COPY ./deps/grafana/conf /usr/share/grafana/conf
+COPY ./deps/grafana/scripts /usr/share/grafana/scripts
 
 COPY ./deps/grafana-dashboards/panels /usr/share/percona-dashboards/panels/
 COPY ./deps/grafana-dashboards/pmm-app/dist /usr/share/percona-dashboards/panels/pmm-app/dist
