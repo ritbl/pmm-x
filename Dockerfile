@@ -1,4 +1,4 @@
-FROM golang:1.19.2-bullseye as grafana-back-builder
+FROM golang:1.19.2-bullseye as back-builder
 
 RUN apt install -y gcc g++ make
 
@@ -16,10 +16,11 @@ COPY deps/grafana/.bingo .bingo
 RUN go mod verify
 RUN make build-go
 
-FROM node:16-alpine3.15 as grafana-front-builder
+FROM node:16.17-bullseye as front-builder
 
 ENV NODE_OPTIONS="--max_old_space_size=8000"
 
+# Grafana Dashboards
 WORKDIR /grafana
 
 COPY deps/grafana/package.json deps/grafana/yarn.lock deps/grafana/.yarnrc.yml ./
@@ -37,6 +38,18 @@ COPY deps/grafana/emails emails
 
 ENV NODE_ENV production
 RUN yarn build
+
+# Grafana Dashboards
+WORKDIR /grafana-dashboards
+
+RUN npm install -g npm@latest
+
+COPY ./deps/grafana-dashboards ./
+WORKDIR /grafana-dashboards/pmm-app
+RUN npm version
+RUN	npm ci
+RUN	npm i -g @grafana/toolkit
+RUN npm run build
 
 FROM golang:1.19.2-bullseye as pmm-builder
 
@@ -63,14 +76,14 @@ RUN apt-get update && apt-get install -y \
 # grafana
 RUN adduser grafana
 RUN mkdir -p /usr/share/grafana/data
-COPY --from=grafana-front-builder /grafana/public /usr/share/grafana/public
-COPY --from=grafana-front-builder /grafana/tools /usr/share/grafana/tools
-COPY --from=grafana-back-builder /grafana/bin/*/grafana-server /usr/sbin/grafana-server
+COPY --from=front-builder /grafana/public /usr/share/grafana/public
+COPY --from=front-builder /grafana/tools /usr/share/grafana/tools
+COPY --from=back-builder /grafana/bin/*/grafana-server /usr/sbin/grafana-server
 COPY ./deps/grafana/conf /usr/share/grafana/conf
 COPY ./deps/grafana/scripts /usr/share/grafana/scripts
 
-COPY ./deps/grafana-dashboards/panels /usr/share/percona-dashboards/panels/
-COPY ./deps/grafana-dashboards/pmm-app/dist /usr/share/percona-dashboards/panels/pmm-app/dist
+COPY  --from=front-builder /grafana-dashboards/panels /usr/share/percona-dashboards/panels/
+COPY  --from=front-builder /grafana-dashboards/pmm-app/dist /usr/share/percona-dashboards/panels/pmm-app/dist
 
 # clickhouse
 RUN apt-get install -y apt-transport-https ca-certificates dirmngr && \
