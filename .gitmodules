@@ -42,3 +42,7 @@
 	path = submodules/postgres_exporter
 	url = git@github.com:percona/postgres_exporter.git
 	branch = main
+[submodule "submodules/node_exporter"]
+	path = submodules/node_exporter
+	url = git@github.com:percona/node_exporter.git
+	branch = main
