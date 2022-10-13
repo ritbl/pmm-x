@@ -28,3 +28,12 @@ Container contains:
    - azure_metrics_exporter (Percona)
    - rds_exporter (Percona)
 
+## Docker 
+
+Configure docker to use buildx, build and push image.
+
+```bash
+docker buildx create --use
+docker login
+docker buildx build --push --platform=linux/amd64,linux/arm64 --tag=ritbl/pmm-x:0.0.1 .
+```
