@@ -5,8 +5,5 @@ include Makefile.include
 pull-repos: 							##
 	./scripts/pull-repositories.sh
 
-build:
-	./scripts/build.sh
-
-run-fg:
-	docker-compose up --build
+run-fg: pull-repos
+	DOCKER_BUILDKIT=1 docker-compose up --build

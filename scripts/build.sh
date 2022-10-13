@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# This serves as a play ground and not used in docker build pipeline
+
 set -o errexit
 set -o xtrace
 
@@ -6,19 +9,19 @@ export GOARCH=amd64
 export GOOS=linux
 
 cd ./deps/VictoriaMetrics/app/victoria-metrics
-go build  -o victoria-metrics.linux.arm64
+go build  -o victoria-metrics
 cd -
 
 cd ./deps/VictoriaMetrics/app/vmalert
-go build  -o vmalert.linux.arm64
+go build  -o vmalert
 cd -
 
 cd ./deps/VictoriaMetrics/app/vmagent
-go build  -o vmagent.linux.arm64
+go build  -o vmagent
 cd -
 
 cd ./deps/alertmanager/cmd/alertmanager
-go build  -o alertmanager.linux.arm64
+go build  -o alertmanager
 cd -
 
 cd ./deps/dbaas-controller
