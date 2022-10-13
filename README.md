@@ -33,7 +33,11 @@ Container contains:
 Configure docker to use buildx, build and push image.
 
 ```bash
+# setup (once)
+docker run -it --rm --privileged tonistiigi/binfmt --install all # installs qemu emulators
 docker buildx create --use
+
+# login and push
 docker login
 docker buildx build --push --platform=linux/amd64,linux/arm64 --tag=ritbl/pmm-x:0.0.1 .
 ```
