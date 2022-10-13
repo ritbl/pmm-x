@@ -41,3 +41,12 @@ docker buildx create --use
 docker login
 docker buildx build --push --platform=linux/amd64,linux/arm64 --tag=ritbl/pmm-x:0.0.1 .
 ```
+
+## Build Troubleshooting 
+
+Check if you have enough space in docker vm:
+
+```yaml
+docker run -it --rm --privileged --pid=host justincormack/nsenter1
+df -h
+```
