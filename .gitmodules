@@ -38,3 +38,7 @@
 	path = submodules/rds_exporter
 	url = git@github.com:percona/rds_exporter.git
 	branch = main
+[submodule "submodules/postgres_exporter"]
+	path = submodules/postgres_exporter
+	url = git@github.com:percona/postgres_exporter.git
+	branch = main
