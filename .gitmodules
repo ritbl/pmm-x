@@ -1,40 +1,40 @@
-[submodule "VictoriaMetrics"]
+[submodule "submodules/VictoriaMetrics"]
 	path = submodules/VictoriaMetrics
 	url = git@github.com:VictoriaMetrics/VictoriaMetrics.git
 	branch = master
-[submodule "alertmanager"]
+[submodule "submodules/alertmanager"]
 	path = submodules/alertmanager
 	url = git@github.com:prometheus/alertmanager.git
 	branch = main
-[submodule "grafana"]
+[submodule "submodules/grafana"]
 	path = submodules/grafana
 	url = git@github.com:percona-platform/grafana.git
 	branch = main
-[submodule "grafana-dashboards"]
+[submodule "submodules/grafana-dashboards"]
 	path = submodules/grafana-dashboards
 	url = git@github.com:percona/grafana-dashboards.git
 	branch = main
-[submodule "pmm"]
+[submodule "submodules/pmm"]
 	path = submodules/pmm
 	url = git@github.com:percona/pmm.git
 	branch = main
-[submodule "dbaas-controller"]
+[submodule "submodules/dbaas-controller"]
 	path = submodules/dbaas-controller
 	url = git@github.com:percona-platform/dbaas-controller.git
 	branch = main
-[submodule "qan-api2"]
+[submodule "submodules/qan-api2"]
 	path = submodules/qan-api2
 	url = git@github.com:percona/qan-api2.git
 	branch = main
-[submodule "mongodb_exporter"]
+[submodule "submodules/mongodb_exporter"]
 	path = submodules/mongodb_exporter
 	url = git@github.com:percona/mongodb_exporter.git
 	branch = main
-[submodule "azure_metrics_exporter"]
+[submodule "submodules/azure_metrics_exporter"]
 	path = submodules/azure_metrics_exporter
 	url = git@github.com:percona/azure_metrics_exporter.git
 	branch = main
-[submodule "rds_exporter"]
+[submodule "submodules/rds_exporter"]
 	path = submodules/rds_exporter
 	url = git@github.com:percona/rds_exporter.git
 	branch = main
