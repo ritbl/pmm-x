@@ -15,4 +15,4 @@ jobs:
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: Build
-        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` ${{ github.ref_name }} make publish-${{ matrix.target.arch }}
+        run: TAG="`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"`" ${{ github.ref_name }} make publish-${{ matrix.target.arch }}
