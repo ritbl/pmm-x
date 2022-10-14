@@ -11,7 +11,7 @@ RAW_CORE_TAG=`cat ./components/core/TAG`
 RAW_EXPORTERS_TAG=`cat ./components/exporters/TAG`
 
 publish-foundation:
-	docker buildx build --push --platform=linux/arm64,linux/amd64 --tag=ritbl/pmm-x-foundation:$(TAG) \
+	docker buildx build --push --platform=linux/arm64/v8,linux/amd64 --tag=ritbl/pmm-x-foundation:$(TAG) \
 	-f ./components/foundation/Dockerfile .
 
 publish-raw-grafana:
@@ -69,16 +69,7 @@ publish-with-raw:
 	mkdir -p ./raw/arm64/
 	docker cp pmm-x-raw-exporters-run-arm64:/ ./raw/arm64/
 
-	docker build -t ritbl/pmm-x:$(TAG)-amd64 --build-arg PLATFORM=amd64 --build-arg PLATFORM_DIR=amd64 -f ./Dockerfile .
-	docker push ritbl/pmm-x:$(TAG)-amd64
-	docker build -t ritbl/pmm-x:$(TAG)-arm64 --build-arg PLATFORM=arm64 --build-arg PLATFORM_DIR=arm64 -f ./Dockerfile .
-	docker push ritbl/pmm-x:$(TAG)-arm64
-	docker manifest create \
-	    ritbl/pmm-x:$(TAG) \
-		--amend ritbl/pmm-x:$(TAG)-arm64 \
-		--amend ritbl/pmm-x:$(TAG)-amd64
-	docker manifest push \
-	    ritbl/pmm-x:$(TAG)
+	docker buildx build --push --platform=linux/amd64,linux/arm64 --tag=ritbl/pmm-x:$(TAG) .
 
 trigger:
 	git commit --allow-empty -m "Trigger CI"
