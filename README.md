@@ -10,7 +10,7 @@ Container contains:
  - SupervisorD
  - PostgreSQL
  - Clickhouse
- - VictoriaMetrics
+ - VictoriaMetrics (Percona)
  - Nginx
  - Grafana (Percona)
  - vmalert
