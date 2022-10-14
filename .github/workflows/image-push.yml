@@ -3,8 +3,9 @@ name: Container Image Publish
 on:
 #  push:
 #    branches: [ "main" ]
-  pull_request:
-    branches: [ "FB/*" ]
+  push:
+    branches:
+      - "FB/**"
 
 jobs:
   build:
