@@ -10,9 +10,9 @@ jobs:
   build:
     strategy:
       matrix:
-        arch:
+        target:
           - [self-hosted, X64]
-    runs-on: ${{ matrix.arch }}
+    runs-on: ${{ matrix.target }}
     steps:
       - name: Check out code
         uses: percona-platform/checkout@v3
