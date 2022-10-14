@@ -19,6 +19,6 @@ clone() {
   fi
 }
 
-clone "pmm" "https://github.com/percona/pmm.git"
+clone "pmm" "https://github.com/percona/pmm.git" "PMM-10600-add-mongodb-edition-datapoint"
 clone "dbaas-controller" "https://github.com/percona-platform/dbaas-controller.git"
 clone "qan-api2" "https://github.com/percona/qan-api2.git"
