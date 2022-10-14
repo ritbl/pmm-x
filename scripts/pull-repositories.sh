@@ -19,17 +19,17 @@ clone() {
   fi
 }
 
-clone "VictoriaMetrics" "git@github.com:VictoriaMetrics/VictoriaMetrics.git" "pmm-6401-v1.77.1"
-clone "alertmanager" "git@github.com:prometheus/alertmanager.git"
-clone "grafana" "git@github.com:percona-platform/grafana.git"
-clone "grafana-dashboards" "git@github.com:percona/grafana-dashboards.git"
-clone "pmm" "git@github.com:percona/pmm.git"
-clone "dbaas-controller" "git@github.com:percona-platform/dbaas-controller.git"
-clone "qan-api2" "git@github.com:percona/qan-api2.git"
+clone "VictoriaMetrics" "https://github.com/VictoriaMetrics/VictoriaMetrics.git" "pmm-6401-v1.77.1"
+clone "alertmanager" "https://github.com/prometheus/alertmanager.git"
+clone "grafana" "https://github.com/percona-platform/grafana.git"
+clone "grafana-dashboards" "https://github.com/percona/grafana-dashboards.git"
+clone "pmm" "https://github.com/percona/pmm.git"
+clone "dbaas-controller" "https://github.com/percona-platform/dbaas-controller.git"
+clone "qan-api2" "https://github.com/percona/qan-api2.git"
 
 ## exporters
-clone "postgres_exporter" "git@github.com:percona/postgres_exporter.git"
-clone "mongodb_exporter" "git@github.com:percona/mongodb_exporter.git"
-clone "node_exporter" "git@github.com:percona/node_exporter.git"
-clone "azure_metrics_exporter" "git@github.com:percona/azure_metrics_exporter.git"
-clone "rds_exporter" "git@github.com:percona/rds_exporter.git"
+clone "postgres_exporter" "https://github.com/percona/postgres_exporter.git"
+clone "mongodb_exporter" "https://github.com/percona/mongodb_exporter.git"
+clone "node_exporter" "https://github.com/percona/node_exporter.git"
+clone "azure_metrics_exporter" "https://github.com/percona/azure_metrics_exporter.git"
+clone "rds_exporter" "https://github.com/percona/rds_exporter.git"
