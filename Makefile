@@ -38,7 +38,6 @@ publish-foundation:
 
 trigger:
 	git commit --allow-empty -m "Trigger CI"
-	git push
 
 reset:
 	git submodule foreach git reset --hard
