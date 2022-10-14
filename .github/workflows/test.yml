@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [X64], arch: amd64, key: hosted-amd64 }
+          - {machine: [ubuntu-latest], arch: amd64, key: hosted-amd64 }
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: Build
