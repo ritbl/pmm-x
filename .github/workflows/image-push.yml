@@ -4,7 +4,8 @@ on:
 #  push:
 #    branches: [ "main" ]
   pull_request:
-    branches: [ "FB/*" ]
+    branches:
+      - "FB\/*"
 
 jobs:
   build:
