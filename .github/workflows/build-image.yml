@@ -12,5 +12,10 @@ jobs:
     steps:
       - name: Check out code
         uses: percona-platform/checkout@v3
-      - name: build
-        run: make build-amd64
+      - name: Prepare
+        run: make prepare
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: deps
+          key: ${{ runner.os }}-deps

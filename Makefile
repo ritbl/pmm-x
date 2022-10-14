@@ -17,10 +17,10 @@ prepare:
 	docker buildx create --use
 	./scripts/pull-repositories.sh
 
-build-amd64: prepare
+build-amd64:
 	docker buildx build --platform=linux/amd64 --tag=ritbl/pmm-x:$(TAG) .
 
-build-arm64: prepare
+build-arm64:
 	docker buildx build --platform=linux/arm64 --tag=ritbl/pmm-x:$(TAG) .
 
 reset:
