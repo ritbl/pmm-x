@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, ${{ matrix.os }}]
+    runs-on: [self-hosted, ${{ matrix.arch }}]
     strategy:
       matrix:
         arch: [X64]
