@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted, X64], arch: amd64 }
+          - {machine: [self-hosted, X64], arch: amd64, key: hosted-amd64 }
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: Check out code
@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: deps
-          key: ${{ matrix.target.machine }}-${{ matrix.target.arch }}-deps
+          key: ${{ matrix.target.key }}-deps
       - name: Prepare
         run: make prepare
       - name: Login to Docker Hub
