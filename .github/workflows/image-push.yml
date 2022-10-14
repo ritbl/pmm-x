@@ -30,4 +30,4 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
       - name: Build
-        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make publish
+        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make publish-with-raw
