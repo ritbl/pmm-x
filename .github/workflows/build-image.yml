@@ -29,4 +29,4 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
       - name: Build
-        run: TAG=${{ github.base_ref }} make publish-${{ matrix.target.arch }}
+        run: TAG=${{ github.ref_name }} make publish-${{ matrix.target.arch }}
