@@ -42,7 +42,7 @@ RUN apt-get install -y \
         postgresql postgresql-contrib
 
 # core components
-COPY ./foundation/components /
+COPY ./components/foundation/components /
 
 # victoria
 COPY --from=back-builder /VictoriaMetrics/app/victoria-metrics/victoria-metrics /usr/sbin/victoriametrics
