@@ -10,8 +10,9 @@ jobs:
   build:
     strategy:
       matrix:
-        - {machine: [self-hosted, X64], arch: amd64 }
-    runs-on: ${{ matrix.machine }}
+        target:
+          - {machine: [self-hosted, X64], arch: amd64 }
+    runs-on: ${{ matrix.target.machine }}
     steps:
       - name: Check out code
         uses: percona-platform/checkout@v3
@@ -19,8 +20,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: deps
-          key: ${{ matrix.machine }}-${{ matrix.arch }}-deps
+          key: ${{ matrix.target.machine }}-${{ matrix.target.arch }}-deps
       - name: Prepare
         run: make prepare
       - name: Build
-        run: make build-${{ matrix.arch }}
+        run: make build-${{ matrix.target.arch }}
