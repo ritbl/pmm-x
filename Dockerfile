@@ -22,10 +22,10 @@ COPY  ./raw/${PLATFORM_DIR}/usr/share/percona-dashboards/panels/ /usr/share/perc
 COPY  ./raw/${PLATFORM_DIR}/usr/share/percona-dashboards/panels/pmm-app/dist /usr/share/percona-dashboards/panels/pmm-app/dist
 
 # dbaas-controller
-COPY ./raw/${PLATFORM_DIR} /usr/sbin/dbaas-controller
+COPY ./raw/${PLATFORM_DIR}/usr/sbin/dbaas-controller /usr/sbin/dbaas-controller
 
 # qan
-COPY ./raw/${PLATFORM_DIR} /usr/sbin/percona-qan-api2
+COPY ./raw/${PLATFORM_DIR}/usr/sbin/percona-qan-api2 /usr/sbin/percona-qan-api2
 
 # pmm
 # -- pmm-managed
