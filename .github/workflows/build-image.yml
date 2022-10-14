@@ -8,10 +8,10 @@ on:
 
 jobs:
   build:
+    runs-on: [self-hosted, ${{ matrix.os }}]
     strategy:
       matrix:
         arch: [X64]
-    runs-on: [self-hosted, ${{ matrix.os }}]
     steps:
       - name: Check out code
         uses: percona-platform/checkout@v3
