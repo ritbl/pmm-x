@@ -1,0 +1,20 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "gha", "main" ]
+  pull_request:
+    branches: [ "FB/*" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        target:
+          - {machine: [X64], arch: amd64, key: hosted-amd64 }
+    runs-on: ${{ matrix.target.machine }}
+    steps:
+      - name: Build
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: TAG="::set-output name=fragment::${FB##*/}" ${{ github.ref_name }} make publish-${{ matrix.target.arch }}
