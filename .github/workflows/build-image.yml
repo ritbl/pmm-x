@@ -12,6 +12,7 @@ jobs:
       matrix:
         target:
           - {machine: [self-hosted, X64], arch: amd64, key: hosted-amd64 }
+          - {machine: [self-hosted, ARM64], arch: arm64, key: hosted-arm64 }
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: Check out code
