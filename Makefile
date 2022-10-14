@@ -3,7 +3,7 @@
 include Makefile.include
 
 ifeq ($(TAG),)
-TAG := '0.0.1'
+TAG := 'latest'
 endif
 
 pull-repos: 							##
@@ -31,6 +31,10 @@ publish-arm64:
 
 publish:
 	docker buildx build --push --platform=linux/arm64,linux/amd64 --tag=ritbl/pmm-x:$(TAG) .
+
+publish-foundation:
+	docker buildx build --push --platform=linux/arm64,linux/amd64 --tag=ritbl/pmm-x-foundation:$(TAG) \
+	-f ./foundation/Dockerfile .
 
 trigger:
 	git commit --allow-empty -m "Trigger CI"

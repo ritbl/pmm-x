@@ -1,4 +1,4 @@
-FROM golang:1.19.2-bullseye as back-builder
+FROM golang:1.19.2-buster as back-builder
 
 RUN apt install -y gcc g++ make
 
@@ -24,24 +24,6 @@ WORKDIR /pmm
 COPY ./deps/pmm ./
 RUN --mount=type=cache,target=/root/go/pkg/mod \
     make init release
-
-# Victoria
-COPY ./deps/VictoriaMetrics/ /VictoriaMetrics
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /VictoriaMetrics/app/victoria-metrics && \
-    go build  -o victoria-metrics
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /VictoriaMetrics/app/vmalert && \
-    go build  -o vmalert
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /VictoriaMetrics/app/vmagent && \
-    go build  -o vmagent
-
-# AlertManager
-COPY ./deps/alertmanager /alertmanager
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /alertmanager/cmd/alertmanager && \
-    go build  -o alertmanager
 
 # dbaas-controller
 COPY ./deps/dbaas-controller /dbaas-controller
@@ -86,7 +68,7 @@ RUN --mount=type=cache,target=/root/go/pkg/mod \
     cd /rds_exporter && \
     go build
 
-FROM node:16.17-bullseye as front-builder
+FROM node:16.17-buster as front-builder
 
 ENV NODE_OPTIONS="--max_old_space_size=8000"
 RUN npm install -g npm@latest
@@ -122,7 +104,7 @@ RUN --mount=type=cache,target=/grafana-dashboards/pmm-app/node_modules \
 RUN --mount=type=cache,target=/grafana-dashboards/pmm-app/node_modules \
     NODE_ENV=production npm run build
 
-FROM ubuntu:22.04
+FROM ritbl/pmm-x-foundation:0.0.1
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -130,9 +112,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN adduser pmm
 RUN mkdir -p \
     /srv/logs/
-
-RUN apt-get update && apt-get install -y \
-        curl gnupg
 
 # grafana
 RUN adduser grafana
@@ -146,32 +125,6 @@ COPY ./deps/grafana/scripts /usr/share/grafana/scripts
 COPY  --from=front-builder /grafana-dashboards/panels /usr/share/percona-dashboards/panels/
 COPY  --from=front-builder /grafana-dashboards/pmm-app/dist /usr/share/percona-dashboards/panels/pmm-app/dist
 
-# clickhouse
-RUN apt-get install -y apt-transport-https ca-certificates dirmngr && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 8919F6BD2B48D754 && \
-    echo "deb https://packages.clickhouse.com/deb stable main" | tee /etc/apt/sources.list.d/clickhouse.list && \
-    apt-get update && \
-    apt-get install -y clickhouse-server clickhouse-client
-
-# supervisor, nginx, pg
-RUN adduser nginx
-RUN apt-get install -y \
-        supervisor \
-        nginx \
-        postgresql postgresql-contrib
-
-# core components
-COPY components /
-
-# victoria
-COPY --from=back-builder /VictoriaMetrics/app/victoria-metrics/victoria-metrics /usr/sbin/victoriametrics
-
-# vmalert
-COPY --from=back-builder /VictoriaMetrics/app/vmalert/vmalert /usr/sbin/vmalert
-
-# alertmanager
-COPY --from=back-builder /alertmanager/cmd/alertmanager/alertmanager /usr/sbin/alertmanager
-
 # dbaas-controller
 COPY --from=back-builder /dbaas-controller/bin/dbaas-controller /usr/sbin/dbaas-controller
 
@@ -183,7 +136,6 @@ COPY --from=back-builder /qan-api2/bin/qan-api2 /usr/sbin/percona-qan-api2
 COPY --from=back-builder /pmm/bin/pmm-managed /usr/sbin/pmm-managed
 # -- pmm-agent
 COPY --from=back-builder /pmm/bin/pmm-agent  /usr/sbin/pmm-agent
-COPY --from=back-builder /VictoriaMetrics/app/vmagent/vmagent  /usr/local/percona/pmm2/exporters/vmagent
 # -- pmm-admin
 COPY --from=back-builder /pmm/bin/pmm-admin  /usr/sbin/pmm-admin
 
