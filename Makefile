@@ -20,13 +20,13 @@ prepare:
 build-amd64:
 	docker buildx build --platform=linux/amd64 --tag=ritbl/pmm-x:$(TAG) .
 
-build-amd64:
+publish-amd64:
 	docker buildx build --push --platform=linux/amd64 --tag=ritbl/pmm-x:$(TAG) .
 
 build-arm64:
 	docker buildx build --platform=linux/arm64 --tag=ritbl/pmm-x:$(TAG) .
 
-build-arm64:
+publish-arm64:
 	docker buildx build --push --platform=linux/arm64 --tag=ritbl/pmm-x:$(TAG) .
 
 reset:
