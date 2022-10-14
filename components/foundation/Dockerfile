@@ -4,20 +4,16 @@ RUN apt install -y gcc g++ make
 
 # Victoria
 COPY ./deps/VictoriaMetrics/ /VictoriaMetrics
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /VictoriaMetrics/app/victoria-metrics && \
+RUN cd /VictoriaMetrics/app/victoria-metrics && \
     go build  -o victoria-metrics
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /VictoriaMetrics/app/vmalert && \
+RUN cd /VictoriaMetrics/app/vmalert && \
     go build  -o vmalert
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /VictoriaMetrics/app/vmagent && \
+RUN cd /VictoriaMetrics/app/vmagent && \
     go build  -o vmagent
 
 # AlertManager
 COPY ./deps/alertmanager /alertmanager
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /alertmanager/cmd/alertmanager && \
+RUN cd /alertmanager/cmd/alertmanager && \
     go build  -o alertmanager
 
 FROM ubuntu:22.04

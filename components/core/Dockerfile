@@ -5,19 +5,16 @@ RUN apt install -y gcc g++ make
 # PMM
 WORKDIR /pmm
 COPY ./deps/pmm ./
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    make init release
+RUN make init release
 
 # dbaas-controller
 COPY ./deps/dbaas-controller /dbaas-controller
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /dbaas-controller && \
+RUN cd /dbaas-controller && \
     make release
 
 # qan-api2
 COPY ./deps/qan-api2 /qan-api2
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /qan-api2 && \
+RUN cd /qan-api2 && \
     make release
 
 FROM scratch

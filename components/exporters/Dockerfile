@@ -5,32 +5,27 @@ RUN apt install -y gcc g++ make
 # exporters
 # -- azure_exporter
 COPY ./deps/azure_metrics_exporter /azure_metrics_exporter
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /azure_metrics_exporter && \
+RUN cd /azure_metrics_exporter && \
     go build
 
 # -- mongodb_exporter
 COPY ./deps/mongodb_exporter /mongodb_exporter
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /mongodb_exporter && \
+RUN cd /mongodb_exporter && \
     go build
 
 # -- node_exporter
 COPY ./deps/node_exporter /node_exporter
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /node_exporter && \
+RUN cd /node_exporter && \
     go build
 
 # -- postgres_exporter
 COPY ./deps/postgres_exporter /postgres_exporter
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /postgres_exporter/cmd/postgres_exporter && \
+RUN cd /postgres_exporter/cmd/postgres_exporter && \
     go build
 
 # -- rds_exporter
 COPY ./deps/rds_exporter /rds_exporter
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    cd /rds_exporter && \
+RUN cd /rds_exporter && \
     go build
 
 FROM scratch

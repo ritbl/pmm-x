@@ -14,10 +14,8 @@ COPY ./deps/grafana/scripts scripts
 COPY ./deps/grafana/cue.mod cue.mod
 COPY ./deps/grafana/.bingo .bingo
 
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    go mod verify
-RUN --mount=type=cache,target=/root/go/pkg/mod \
-    make build-go
+RUN go mod verify
+RUN make build-go
 
 FROM node:16.17-buster as front-builder
 
@@ -32,8 +30,7 @@ COPY deps/grafana/.yarn ./.yarn
 COPY deps/grafana/packages ./packages
 COPY deps/grafana/plugins-bundled ./plugins-bundled
 
-RUN --mount=type=cache,target=/grafana/.yarn/cache \
-    yarn install
+RUN yarn install
 
 COPY deps/grafana/tsconfig.json deps/grafana/.eslintrc deps/grafana/.editorconfig deps/grafana/.browserslistrc deps/grafana/.prettierrc.js deps/grafana/babel.config.json deps/grafana/.linguirc ./
 COPY deps/grafana/public public
@@ -41,19 +38,16 @@ COPY deps/grafana/tools tools
 COPY deps/grafana/scripts scripts
 COPY deps/grafana/emails emails
 
-RUN --mount=type=cache,target=/grafana/.yarn/cache \
-    NODE_ENV=production yarn build
+RUN NODE_ENV=production yarn build
 
 # Grafana Dashboards
 WORKDIR /grafana-dashboards
 
 COPY ./deps/grafana-dashboards ./
 WORKDIR /grafana-dashboards/pmm-app
-RUN --mount=type=cache,target=/grafana-dashboards/pmm-app/node_modules \
-    npm version && \
+RUN npm version && \
     npm ci
-RUN --mount=type=cache,target=/grafana-dashboards/pmm-app/node_modules \
-    NODE_ENV=production npm run build
+RUN NODE_ENV=production npm run build
 
 FROM scratch
 
