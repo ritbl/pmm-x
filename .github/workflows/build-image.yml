@@ -30,4 +30,6 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
       - name: Build
-        run: TAG=${{ github.ref_name }} make publish-${{ matrix.target.arch }}
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: TAG="::set-output name=fragment::${FB##*/}" ${{ github.ref_name }} make publish-${{ matrix.target.arch }}
