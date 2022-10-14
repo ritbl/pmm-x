@@ -12,8 +12,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted, X64], arch: amd64, key: hosted-amd64 }
-          - {machine: [self-hosted, ARM64], arch: arm64, key: hosted-arm64 }
+          - {machine: [self-hosted, star01], key: hosted-amd64 }
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: Check out code
@@ -31,4 +30,4 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
       - name: Build
-        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make publish-${{ matrix.target.arch }}
+        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make publish

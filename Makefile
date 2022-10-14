@@ -29,5 +29,8 @@ build-arm64:
 publish-arm64:
 	docker buildx build --push --platform=linux/arm64 --tag=ritbl/pmm-x:$(TAG) .
 
+publish:
+	docker buildx build --push --platform=linux/arm64,linux/amd64 --tag=ritbl/pmm-x:$(TAG) .
+
 reset:
 	git submodule foreach git reset --hard
