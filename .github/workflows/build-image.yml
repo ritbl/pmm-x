@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        arch: [ Linux ]
+        arch: [Linux]
     runs-on: [self-hosted, ${{ matrix.os }}]
     steps:
       - name: Check out code
