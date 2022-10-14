@@ -51,7 +51,9 @@ RUN --mount=type=cache,target=/root/go/pkg/mod \
     cd /rds_exporter && \
     go build
 
-FROM ritbl/pmm-x-foundation:0.0.1
+ARG PLATFORM
+FROM --platform=${PLATFORM} ritbl/pmm-x-foundation:0.0.1
+ARG PLATFORM_DIR
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -63,14 +65,14 @@ RUN mkdir -p \
 # grafana
 RUN adduser grafana
 RUN mkdir -p /usr/share/grafana/data
-COPY ./raw/usr/share/grafana/public /usr/share/grafana/public
-COPY ./raw/usr/share/grafana/tools /usr/share/grafana/tools
-COPY ./raw/usr/sbin/grafana-server /usr/sbin/grafana-server
-COPY ./raw/usr/share/grafana/conf /usr/share/grafana/conf
-COPY ./raw/usr/share/grafana/conf /usr/share/grafana/scripts
+COPY ./raw/${PLATFORM_DIR}/usr/share/grafana/public /usr/share/grafana/public
+COPY ./raw/${PLATFORM_DIR}/usr/share/grafana/tools /usr/share/grafana/tools
+COPY ./raw/${PLATFORM_DIR}/usr/sbin/grafana-server /usr/sbin/grafana-server
+COPY ./raw/${PLATFORM_DIR}/usr/share/grafana/conf /usr/share/grafana/conf
+COPY ./raw/${PLATFORM_DIR}/usr/share/grafana/conf /usr/share/grafana/scripts
 
-COPY  ./raw/usr/share/percona-dashboards/panels/ /usr/share/percona-dashboards/panels/
-COPY  ./raw/usr/share/percona-dashboards/panels/pmm-app/dist /usr/share/percona-dashboards/panels/pmm-app/dist
+COPY  ./raw/${PLATFORM_DIR}/usr/share/percona-dashboards/panels/ /usr/share/percona-dashboards/panels/
+COPY  ./raw/${PLATFORM_DIR}/usr/share/percona-dashboards/panels/pmm-app/dist /usr/share/percona-dashboards/panels/pmm-app/dist
 
 # dbaas-controller
 COPY --from=back-builder /dbaas-controller/bin/dbaas-controller /usr/sbin/dbaas-controller
