@@ -6,9 +6,9 @@ ifeq ($(TAG),)
 TAG := 'latest'
 endif
 
-ifeq ($(RAW_TAG),)
-RAW_TAG := '0.0.1'
-endif
+RAW_GRAFANA_TAG=`cat ./components/grafana/TAG`
+RAW_CORE_TAG=`cat ./components/core/TAG`
+RAW_EXPORTERS_TAG=`cat ./components/exporters/TAG`
 
 publish-foundation:
 	docker buildx build --push --platform=linux/arm64,linux/amd64 --tag=ritbl/pmm-x-foundation:$(TAG) \
@@ -32,40 +32,40 @@ publish-raw-exporters:
 publish-with-raw:
 	# AMD64
 	# -- grafana
-	docker pull ritbl/pmm-x-raw-grafana:$(RAW_TAG) --platform linux/amd64
+	docker pull ritbl/pmm-x-raw-grafana:$(RAW_GRAFANA_TAG) --platform linux/amd64
 	-docker rm pmm-x-raw-grafana-run-amd64
-	-docker run  --platform linux/amd64 --name pmm-x-raw-grafana-run-amd64 ritbl/pmm-x-raw-grafana:$(RAW_TAG)
+	-docker run  --platform linux/amd64 --name pmm-x-raw-grafana-run-amd64 ritbl/pmm-x-raw-grafana:$(RAW_GRAFANA_TAG)
 	mkdir -p ./raw/amd64/
 	docker cp pmm-x-raw-grafana-run-amd64:/ ./raw/amd64/
 	# -- core
-	docker pull ritbl/pmm-x-raw-core:$(RAW_TAG) --platform linux/amd64
+	docker pull ritbl/pmm-x-raw-core:$(RAW_CORE_TAG) --platform linux/amd64
 	-docker rm pmm-x-raw-core-run-amd64
-	-docker run  --platform linux/amd64 --name pmm-x-raw-core-run-amd64 ritbl/pmm-x-raw-core:$(RAW_TAG)
+	-docker run  --platform linux/amd64 --name pmm-x-raw-core-run-amd64 ritbl/pmm-x-raw-core:$(RAW_CORE_TAG)
 	mkdir -p ./raw/amd64/
 	docker cp pmm-x-raw-core-run-amd64:/ ./raw/amd64/
 	# -- exporters
-	docker pull ritbl/pmm-x-raw-exporters:$(RAW_TAG) --platform linux/amd64
+	docker pull ritbl/pmm-x-raw-exporters:$(RAW_EXPORTERS_TAG) --platform linux/amd64
 	-docker rm pmm-x-raw-exporters-run-amd64
-	-docker run  --platform linux/amd64 --name pmm-x-raw-exporters-run-amd64 ritbl/pmm-x-raw-exporters:$(RAW_TAG)
+	-docker run  --platform linux/amd64 --name pmm-x-raw-exporters-run-amd64 ritbl/pmm-x-raw-exporters:$(RAW_EXPORTERS_TAG)
 	mkdir -p ./raw/amd64/
 	docker cp pmm-x-raw-exporters-run-amd64:/ ./raw/amd64/
 	# ARM64
 	# -- grafana
-	docker pull ritbl/pmm-x-raw-grafana:$(RAW_TAG) --platform linux/arm64
+	docker pull ritbl/pmm-x-raw-grafana:$(RAW_GRAFANA_TAG) --platform linux/arm64
 	-docker rm pmm-x-raw-grafana-run-arm64
-	-docker run  --platform linux/arm64 --name pmm-x-raw-grafana-run-arm64 ritbl/pmm-x-raw-grafana:$(RAW_TAG)
+	-docker run  --platform linux/arm64 --name pmm-x-raw-grafana-run-arm64 ritbl/pmm-x-raw-grafana:$(RAW_GRAFANA_TAG)
 	mkdir -p ./raw/arm64/
 	docker cp pmm-x-raw-grafana-run-arm64:/ ./raw/arm64/
 	# -- core
-	docker pull ritbl/pmm-x-raw-core:$(RAW_TAG) --platform linux/arm64
+	docker pull ritbl/pmm-x-raw-core:$(RAW_CORE_TAG) --platform linux/arm64
 	-docker rm pmm-x-raw-core-run-arm64
-	-docker run  --platform linux/arm64 --name pmm-x-raw-core-run-arm64 ritbl/pmm-x-raw-core:$(RAW_TAG)
+	-docker run  --platform linux/arm64 --name pmm-x-raw-core-run-arm64 ritbl/pmm-x-raw-core:$(RAW_CORE_TAG)
 	mkdir -p ./raw/arm64/
 	docker cp pmm-x-raw-core-run-arm64:/ ./raw/arm64/
 	# -- exporters
-	docker pull ritbl/pmm-x-raw-exporters:$(RAW_TAG) --platform linux/arm64
+	docker pull ritbl/pmm-x-raw-exporters:$(RAW_EXPORTERS_TAG) --platform linux/arm64
 	-docker rm pmm-x-raw-exporters-run-arm64
-	-docker run  --platform linux/arm64 --name pmm-x-raw-exporters-run-arm64 ritbl/pmm-x-raw-exporters:$(RAW_TAG)
+	-docker run  --platform linux/arm64 --name pmm-x-raw-exporters-run-arm64 ritbl/pmm-x-raw-exporters:$(RAW_EXPORTERS_TAG)
 	mkdir -p ./raw/arm64/
 	docker cp pmm-x-raw-exporters-run-arm64:/ ./raw/arm64/
 
