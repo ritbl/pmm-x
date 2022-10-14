@@ -28,3 +28,26 @@ Container contains:
    - azure_metrics_exporter (Percona)
    - rds_exporter (Percona)
 
+## Docker 
+
+Configure docker to use buildx, build and push image.
+
+```bash
+# setup (once)
+docker run -it --rm --privileged tonistiigi/binfmt --install all # installs qemu emulators
+docker buildx create --use
+
+# login and push
+docker login
+docker buildx build --push --platform=linux/amd64,linux/arm64 --tag=ritbl/pmm-x:0.0.1 .
+```
+
+## Build Troubleshooting 
+
+#### Mac/Win:
+Check if you have enough space in docker vm:
+
+```yaml
+docker run -it --rm --privileged --pid=host justincormack/nsenter1
+df -h
+```

@@ -17,8 +17,8 @@ services:
       - "80:80"
       - "443:443"
 
-    volumes:
-      - "/Users/am/dev/implex/percona/ui-tracking/grafana/public:/usr/share/grafana/public"
+#    volumes:
+#      - "/Users/am/dev/implex/percona/ui-tracking/grafana/public:/usr/share/grafana/public"
 
       # see https://github.com/golang/go/wiki/LinuxKernelSignalVectorBug#what-to-do
     ulimits:
