@@ -24,6 +24,11 @@ publish-raw-core:
 	docker buildx build --push --platform=linux/arm64,linux/amd64 --tag=ritbl/pmm-x-core-grafana:$(TAG) \
 	-f ./components/core/Dockerfile .
 
+publish-raw-exporters:
+	./components/exporters/pull-repositories.sh
+	docker buildx build --push --platform=linux/arm64,linux/amd64 --tag=ritbl/pmm-x-exporters-grafana:$(TAG) \
+	-f ./components/exporters/Dockerfile .
+
 publish-with-raw:
 	# AMD64
 	# -- grafana
