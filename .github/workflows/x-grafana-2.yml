@@ -27,9 +27,6 @@ jobs:
         uses: percona-platform/checkout@v3
 #      - name: Build
 #        run: TAG=0.2.0 make build-x-grafana-fe
-      - name: debug
-        run: |
-          ls -la ./components/grafana
       - name: Upload to S3
         uses: ritbl/aws-s3-github-action@v1.0.1
         with:
@@ -37,10 +34,9 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_S3_SECRET_KEY }}
           aws_region: "eu-central-1"
           command: cp
-          source: "./components/grafana/"
+          source: "./components/grafana/*.yml"
 #          source: "./components/grafana/*.tar.lz4"
           destination: s3://pmm-x/
-          flags: --include "*.yml"
 #  build-be:
 #    strategy:
 #      matrix:
