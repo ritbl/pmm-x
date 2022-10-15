@@ -1,22 +1,3 @@
-FROM golang:1.19.2-buster as back-builder
-
-RUN apt install -y gcc g++ make
-
-# Grafana
-WORKDIR /grafana
-
-COPY ./deps/grafana/go.mod ./deps/grafana/go.sum ./deps/grafana/embed.go ./deps/grafana/Makefile ./deps/grafana/build.go ./deps/grafana/package.json ./
-COPY ./deps/grafana/packages/grafana-schema packages/grafana-schema
-COPY ./deps/grafana/public/app/plugins public/app/plugins
-COPY ./deps/grafana/public/api-spec.json public/api-spec.json
-COPY ./deps/grafana/pkg pkg
-COPY ./deps/grafana/scripts scripts
-COPY ./deps/grafana/cue.mod cue.mod
-COPY ./deps/grafana/.bingo .bingo
-
-RUN go mod verify
-RUN make build-go
-
 FROM node:16.17-buster as front-builder
 
 ENV NODE_OPTIONS="--max_old_space_size=8000"

@@ -6,18 +6,12 @@ clone() {
   local target=$1
   local repo=$2
   local target_dir="./deps/$target"
-  local tag=$3
+  local branch=$3
 
   if [[ ! -d $target_dir ]];then
-    git clone $repo "$target_dir"
-  fi
-
-  if [[ ! -z $tag ]];then
-      cd "$target_dir"
-      git checkout $tag
-      cd -
+    git clone --depth=1 $repo "$target_dir" --branch $branch
   fi
 }
 
-clone "grafana" "https://github.com/percona-platform/grafana.git"
-clone "grafana-dashboards" "https://github.com/percona/grafana-dashboards.git"
+clone "grafana" "https://github.com/percona-platform/grafana.git" "main"
+clone "grafana-dashboards" "https://github.com/percona/grafana-dashboards.git" "main"
