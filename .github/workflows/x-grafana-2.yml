@@ -41,7 +41,7 @@ jobs:
         target:
 #          - {machine: [self-hosted, star01], arch: amd64 }
           - {machine: [buildjet-2vcpu-ubuntu-2204] }
-          - {machine: [buildjet-2vcpu-ubuntu-2204-arm]}
+          - {machine: [buildjet-4vcpu-ubuntu-2204-arm]}
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
