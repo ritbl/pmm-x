@@ -28,7 +28,3 @@ cd ..
 
 # compress
 tar -I 'lz4 --fast' -cf x-grafana-fe-$TAG.tar.lz4 pack/
-
-# decompress
-#mkdir pack-2
-#tar -I lz4 -xf grafana-pack.tar.zst -C ./pack-2
