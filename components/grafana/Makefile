@@ -10,6 +10,5 @@ enter-pack:
 build-fe:
 	./pull-repositories.sh
 	echo "TAG=$(TAG)" >> .env
-	sed -i '' -e 's/grafana-toolkit plugin:build"/grafana-toolkit plugin:build --skipTest --skipLint"/' ./deps/grafana-dashboards/pmm-app/package.json
 	docker-compose --profile fe-build up
 	docker-compose --profile fe-pack up
