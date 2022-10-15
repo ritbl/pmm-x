@@ -14,8 +14,8 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [buildjet-2vcpu-ubuntu-2204]}
-#          - {machine: [self-hosted, star01]}
+#          - {machine: [buildjet-2vcpu-ubuntu-2204]}
+          - {machine: [self-hosted, star01]}
     runs-on: ${{ matrix.target.machine }}
 #    runs-on: buildjet-2vcpu-ubuntu-2204
     steps:
@@ -40,9 +40,7 @@ jobs:
     strategy:
       matrix:
         target:
-#          - {machine: [self-hosted, star01], arch: amd64 }
-#          - {machine: [self-hosted] }
-          - {machine: [buildjet-2vcpu-ubuntu-2204]}
+          - {machine: [self-hosted] }
           - {machine: [buildjet-2vcpu-ubuntu-2204-arm]}
     runs-on: ${{ matrix.target.machine }}
     steps:
