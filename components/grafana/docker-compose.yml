@@ -26,4 +26,4 @@ services:
     container_name: grafana-pack
     entrypoint: [ "sh", "-c", "/build/build-pack.sh" ]
     volumes:
-      - ./:/build
+      - "./:/build:z"
