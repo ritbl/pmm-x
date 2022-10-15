@@ -1,5 +1,6 @@
 #!/bin/bash
 set -o xtrace
+set -e
 
 echo "Building Grafana Backend"
 cd /build

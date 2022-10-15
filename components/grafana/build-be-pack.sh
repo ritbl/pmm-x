@@ -1,5 +1,6 @@
 #!/bin/bash
 set -o xtrace
+set -e
 
 echo "Packing Grafana BE"
 cd /build
