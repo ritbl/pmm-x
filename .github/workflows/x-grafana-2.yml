@@ -20,12 +20,6 @@ jobs:
     steps:
       - name: Check out code
         uses: percona-platform/checkout@v3
-      - name: Cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ./components/grafana/deps/grafana/.yarn
-          key: ${{ matrix.target.key }}-x-exporters-deps
       - name: Build
         run: TAG=0.2.0 make build-x-grafana-fe
       - name: Upload to S3
