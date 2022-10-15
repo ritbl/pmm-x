@@ -17,13 +17,13 @@ services:
     entrypoint: [ "sh", "-c", "/build/build-fe.sh" ]
     volumes:
       - "./:/build:z"
-  pack:
+  fe-pack:
     env_file:
       - .env
     profiles:
       - pack-fe
     image: ubuntu:22.04
     container_name: grafana-pack
-    entrypoint: [ "sh", "-c", "/build/build-pack.sh" ]
+    entrypoint: [ "sh", "-c", "/build/build-fe-pack.sh" ]
     volumes:
       - "./:/build:z"
