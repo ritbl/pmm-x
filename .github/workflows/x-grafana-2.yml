@@ -28,4 +28,4 @@ jobs:
           aws_key_id: ${{ secrets.AWS_S3_ACCESS_KEY }}
           aws_secret_access_key: ${{ secrets.AWS_S3_SECRET_KEY}}
           aws_bucket: "eu-central-1"
-          source_dir: "*.tar.lz4"
+          source_dir: "./components/grafana/*.tar.lz4"
