@@ -11,7 +11,8 @@ RAW_CORE_TAG=`head ./components/core/TAG`
 RAW_EXPORTERS_TAG=`head ./components/exporters/TAG`
 
 publish-foundation:
-	docker buildx build --push --platform=linux/arm64/v8,linux/amd64 --tag=ritbl/pmm-x-foundation:$(TAG) \
+	./components/foundation/pull-repositories.sh
+	docker --push buildx build --platform=linux/arm64/v8,linux/amd64 --tag=ritbl/pmm-x-foundation:$(TAG) \
 	-f ./components/foundation/Dockerfile .
 
 publish-raw-grafana:
