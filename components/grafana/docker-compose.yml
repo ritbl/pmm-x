@@ -21,7 +21,7 @@ services:
     env_file:
       - .env
     profiles:
-      - pack-fe
+      - fe-pack
     image: ubuntu:22.04
     container_name: fe-pack
     entrypoint: [ "sh", "-c", "/build/build-fe-pack.sh" ]
