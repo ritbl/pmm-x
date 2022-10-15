@@ -14,8 +14,8 @@ RAW_EXPORTERS_TAG=`head ./components/exporters/TAG`
 publish-x-grafana:
 	cd ./components/grafana && \
 		./pull-repositories.sh && \
-		docker-compose up --profile build && \
-		docker-compose up --profile pack
+		docker-compose --profile build up && \
+		docker-compose --profile pack up
 
 
 # ---- OLD
