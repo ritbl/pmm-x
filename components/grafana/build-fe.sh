@@ -13,6 +13,7 @@ NODE_ENV=production yarn build
 
 # Grafana Dashboards
 cd /build/deps/grafana-dashboards/pmm-app
+sed -i 's/grafana-toolkit plugin:build"/grafana-toolkit plugin:build --skipTest --skipLint"/' package.json
 npm version
 npm ci
 NODE_ENV=production npm run build
