@@ -27,7 +27,7 @@ jobs:
       - name: Check out code
         uses: percona-platform/checkout@v3
       - name: Build
-        run: TAG=0.2.0 make build-x-grafana-fe
+        run: TAG=0.4.0 make build-x-grafana-fe
       - name: Upload to S3
         uses: ritbl/gha-aws@v1.0.1
         with:
