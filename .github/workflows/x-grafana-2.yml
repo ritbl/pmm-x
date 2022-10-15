@@ -1,4 +1,4 @@
-name: X:Grafana
+name: X:Grafana FE
 
 on:
 #  push:
@@ -10,11 +10,11 @@ on:
 #      - "components/grafana/**"
 
 jobs:
-  build:
+  build-fe:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted, star01], key: hosted-amd64 }
+          - {machine: [self-hosted, star01]}
     runs-on: ${{ matrix.target.machine }}
 #    runs-on: buildjet-2vcpu-ubuntu-2204
     steps:
@@ -27,6 +27,32 @@ jobs:
         uses: percona-platform/checkout@v3
       - name: Build
         run: TAG=0.2.0 make build-x-grafana-fe
+      - name: Upload to S3
+        uses: keithweaver/aws-s3-github-action@v1.0.0
+        with:
+          aws_access_key_id: ${{ secrets.AWS_S3_ACCESS_KEY }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: "eu-central-1"
+          command: cp
+          source: "./components/grafana/*.tar.lz4"
+          destination: s3://pmm-x
+  build-be:
+    strategy:
+      matrix:
+        target:
+#          - {machine: [self-hosted, star01], arch: amd64 }
+          - {machine: [buildjet-2vcpu-ubuntu-2204], target: amd64 }
+    runs-on: ${{ matrix.target.machine }}
+    steps:
+      - name: cleanup #https://github.com/actions/checkout/issues/211
+        if: ${{ contains(matrix.target.machine, 'star01') }}
+        run: |
+          echo ${{ secrets.DEPLOY_PASSWORD }} | sudo -S rm -rf ${GITHUB_WORKSPACE}
+          mkdir ${GITHUB_WORKSPACE}
+      - name: Check out code
+        uses: percona-platform/checkout@v3
+      - name: Build
+        run: TAG=0.2.0 make build-x-grafana-be-${{ matrix.target.arch }}
       - name: Upload to S3
         uses: keithweaver/aws-s3-github-action@v1.0.0
         with:

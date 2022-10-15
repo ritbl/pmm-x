@@ -14,7 +14,7 @@ X_EXPORTERS_TAG=`head ./components/exporters/TAG`
 build-x-grafana-fe:
 	make -C components/grafana build-fe
 
-build-x-grafana-be:
+build-x-grafana-be-amd64:
 	make -C components/grafana build-be
 
 
