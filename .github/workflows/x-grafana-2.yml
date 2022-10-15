@@ -18,6 +18,9 @@ jobs:
     runs-on: ${{ matrix.target.machine }}
 #    runs-on: buildjet-2vcpu-ubuntu-2204
     steps:
+      - name: cleanup #https://github.com/actions/checkout/issues/211
+        run: |
+          sudo chown -R $USER:$USER $GITHUB_WORKSPACE
       - name: Check out code
         uses: percona-platform/checkout@v3
       - name: Cache
