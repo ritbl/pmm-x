@@ -40,7 +40,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted] }
+          - {machine: [self-hosted, star01] }
           - {machine: [buildjet-4vcpu-ubuntu-2204-arm]}
     runs-on: ${{ matrix.target.machine }}
     steps:
