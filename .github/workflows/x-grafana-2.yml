@@ -15,7 +15,8 @@ jobs:
       matrix:
         target:
           - {machine: [self-hosted, star01], key: hosted-amd64 }
-    runs-on: ${{ matrix.target.machine }}
+#    runs-on: ${{ matrix.target.machine }}
+    runs-on: buildjet-2vcpu-ubuntu-2204
     steps:
       - name: Check out code
         uses: percona-platform/checkout@v3
