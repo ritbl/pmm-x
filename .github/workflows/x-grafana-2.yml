@@ -40,8 +40,8 @@ jobs:
       matrix:
         target:
 #          - {machine: [self-hosted, star01], arch: amd64 }
-          - {machine: [buildjet-2vcpu-ubuntu-2204], arch: amd64 }
-          - {machine: [buildjet-2vcpu-ubuntu-2204-arm], arch: arm64 }
+          - {machine: [buildjet-2vcpu-ubuntu-2204] }
+          - {machine: [buildjet-2vcpu-ubuntu-2204-arm]}
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
@@ -52,7 +52,7 @@ jobs:
       - name: Check out code
         uses: percona-platform/checkout@v3
       - name: Build
-        run: TAG=0.2.0 make build-x-grafana-be-${{ matrix.target.arch }}
+        run: TAG=0.2.0 make build-x-grafana-be
       - name: Upload to S3
         uses: ritbl/gha-aws@v1.0.1
         with:
