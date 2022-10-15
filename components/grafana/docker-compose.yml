@@ -8,7 +8,17 @@ services:
     container_name: be-build
     entrypoint: [ "sh", "-c", "/build/build-be.sh" ]
     volumes:
-      - "./:/build:z"
+      - "./:/build"
+  be-pack:
+    env_file:
+      - .env
+    profiles:
+      - be-pack
+    image: ubuntu:22.04
+    container_name: be-pack
+    entrypoint: [ "sh", "-c", "/build/build-be-pack.sh" ]
+    volumes:
+      - "./:/build"
   fe:
     profiles:
       - fe-build
@@ -16,7 +26,7 @@ services:
     container_name: fe-build
     entrypoint: [ "sh", "-c", "/build/build-fe.sh" ]
     volumes:
-      - "./:/build:z"
+      - "./:/build"
   fe-pack:
     env_file:
       - .env
@@ -26,4 +36,4 @@ services:
     container_name: fe-pack
     entrypoint: [ "sh", "-c", "/build/build-fe-pack.sh" ]
     volumes:
-      - "./:/build:z"
+      - "./:/build"

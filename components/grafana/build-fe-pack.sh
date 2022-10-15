@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o xtrace
 
-echo "Building Grafana"
+echo "Packing Grafana FE"
 cd /build
 
 if ! command -v lz4 &> /dev/null
