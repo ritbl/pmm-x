@@ -18,6 +18,11 @@ jobs:
     runs-on: ${{ matrix.target.machine }}
 #    runs-on: buildjet-2vcpu-ubuntu-2204
     steps:
+      - name: cleanup #https://github.com/actions/checkout/issues/211
+        if: ${{ contains(matrix.target.machine, 'star01') }}
+        run: |
+          echo ${{ secrets.DEPLOY_PASSWORD }} | sudo -S rm -rf ${GITHUB_WORKSPACE}
+          mkdir ${GITHUB_WORKSPACE}
       - name: Check out code
         uses: percona-platform/checkout@v3
       - name: Build
