@@ -28,9 +28,11 @@ jobs:
       - name: Build
         run: TAG=0.2.0 make build-x-grafana-fe
       - name: Upload to S3
-        uses: shallwefootball/s3-upload-action@master
+        uses: keithweaver/aws-s3-github-action@v1.0.0
         with:
-          aws_key_id: ${{ secrets.AWS_S3_ACCESS_KEY }}
-          aws_secret_access_key: ${{ secrets.AWS_S3_SECRET_KEY}}
-          aws_bucket: "eu-central-1"
-          source_dir: "./components/grafana/*.tar.lz4"
+          aws_access_key_id: ${{ secrets.AWS_S3_ACCESS_KEY }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: "eu-central-1"
+          command: cp
+          source: "./components/grafana/*.tar.lz4"
+          destination: s3://pmm-x
