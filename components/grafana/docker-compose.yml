@@ -14,7 +14,6 @@ services:
       - .env
     profiles:
       - be-pack
-    platform: linux/arm64/v8
     image: ubuntu:22.04
     container_name: be-pack
     entrypoint: [ "sh", "-c", "/build/build-be-pack.sh" ]

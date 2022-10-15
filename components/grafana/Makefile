@@ -10,11 +10,11 @@ enter-pack:
 build-fe:
 	./pull-repositories.sh
 	echo "TAG=$(TAG)" >> .env
-	docker-compose --profile fe-build up
-	docker-compose --profile fe-pack up
+	docker-compose --profile fe-build up --force-recreate
+	docker-compose --profile fe-pack up --force-recreate
 
 build-be:
 	./pull-repositories.sh
 	echo "TAG=$(TAG)" >> .env
-	docker-compose --profile be-build up
-	docker-compose --profile be-pack up
+	docker-compose --profile be-build up --force-recreate
+	docker-compose --profile be-pack up --force-recreate
