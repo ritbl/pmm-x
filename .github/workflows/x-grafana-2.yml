@@ -37,9 +37,10 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_S3_SECRET_KEY }}
           aws_region: "eu-central-1"
           command: cp
-          source: "./components/grafana/docker-compose.yml"
+          source: "./components/grafana/"
 #          source: "./components/grafana/*.tar.lz4"
           destination: s3://pmm-x/
+          flags: --include "*.yml"
 #  build-be:
 #    strategy:
 #      matrix:
