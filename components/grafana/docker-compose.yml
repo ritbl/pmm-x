@@ -3,7 +3,7 @@ version: '3.9'
 services:
   be:
     profiles:
-      - build
+      - build-be
     image: golang:1.19.2-buster
     container_name: grafana-be-build
     entrypoint: [ "sh", "-c", "/build/build-be.sh" ]
@@ -11,15 +11,17 @@ services:
       - "./:/build:z"
   fe:
     profiles:
-      - build
+      - build-fe
     image: node:16.17-buster
     container_name: grafana-fe-build
     entrypoint: [ "sh", "-c", "/build/build-fe.sh" ]
     volumes:
       - "./:/build:z"
   pack:
+    env_file:
+      - .env
     profiles:
-      - pack
+      - pack-fe
     image: ubuntu:22.04
     container_name: grafana-pack
     entrypoint: [ "sh", "-c", "/build/build-pack.sh" ]

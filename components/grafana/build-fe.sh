@@ -1,3 +1,6 @@
+#!/bin/bash
+set -o xtrace
+
 echo "Building Grafana"
 
 export NODE_OPTIONS="--max_old_space_size=8000"

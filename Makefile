@@ -6,16 +6,13 @@ ifeq ($(TAG),)
 TAG := 'latest'
 endif
 
-RAW_GRAFANA_TAG=`head ./components/grafana/TAG`
-RAW_CORE_TAG=`head ./components/core/TAG`
-RAW_EXPORTERS_TAG=`head ./components/exporters/TAG`
+X_GRAFANA_TAG=`head ./components/grafana/TAG`
+X_CORE_TAG=`head ./components/core/TAG`
+X_EXPORTERS_TAG=`head ./components/exporters/TAG`
 
 
-publish-x-grafana:
-	cd ./components/grafana && \
-		./pull-repositories.sh && \
-		docker-compose --profile build up && \
-		docker-compose --profile pack up
+build-x-grafana-fe:
+	make -C components/grafana build-fe
 
 
 # ---- OLD
