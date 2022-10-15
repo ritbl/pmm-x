@@ -37,7 +37,7 @@ jobs:
           source: "./components/grafana/"
 #          source: "./components/grafana/*.tar.lz4"
           destination: s3://pmm-x/
-          flags: --recursive --include "*.yml"
+          flags: --recursive --include "*.yml" --exclude "*"
 #  build-be:
 #    strategy:
 #      matrix:
