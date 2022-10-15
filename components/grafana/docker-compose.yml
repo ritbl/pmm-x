@@ -8,7 +8,7 @@ services:
     container_name: grafana-be-build
     entrypoint: [ "sh", "-c", "/build/build-be.sh" ]
     volumes:
-      - ./:/build
+      - "./:/build:Z"
   fe:
     profiles:
       - build
@@ -16,7 +16,7 @@ services:
     container_name: grafana-fe-build
     entrypoint: [ "sh", "-c", "/build/build-fe.sh" ]
     volumes:
-      - ./:/build
+      - "./:/build:Z"
   pack:
     profiles:
       - pack
