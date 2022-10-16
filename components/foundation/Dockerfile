@@ -5,23 +5,25 @@ RUN apt install -y gcc g++ make
 # Victoria
 COPY ./deps/VictoriaMetrics/ /VictoriaMetrics
 RUN cd /VictoriaMetrics/app/victoria-metrics && \
-    go build  -o victoria-metrics
+    go build -o victoria-metrics
 RUN cd /VictoriaMetrics/app/vmalert && \
-    go build  -o vmalert
+    go build -o vmalert
 RUN cd /VictoriaMetrics/app/vmagent && \
-    go build  -o vmagent
+    go build -o vmagent
 
 # AlertManager
 COPY ./deps/alertmanager /alertmanager
 RUN cd /alertmanager/cmd/alertmanager && \
-    go build  -o alertmanager
+    go build -o alertmanager
+RUN cd /alertmanager/cmd/amtool && \
+    go build -o amtool
 
 FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-        curl gnupg lz4 wget
+        curl gnupg lz4 wget make vim
 
 # clickhouse
 RUN apt-get install -y apt-transport-https ca-certificates dirmngr && \
@@ -48,6 +50,9 @@ COPY --from=back-builder /VictoriaMetrics/app/vmalert/vmalert /usr/sbin/vmalert
 
 # alertmanager
 COPY --from=back-builder /alertmanager/cmd/alertmanager/alertmanager /usr/sbin/alertmanager
+
+# amtool
+COPY --from=back-builder /alertmanager/cmd/amtool/amtool /usr/sbin/amtool
 
 # vmagent
 COPY --from=back-builder /VictoriaMetrics/app/vmagent/vmagent  /usr/local/percona/pmm2/exporters/vmagent

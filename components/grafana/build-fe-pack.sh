@@ -17,15 +17,15 @@ cd pack
 
 # -- grafana
 mkdir -p ./usr/share/grafana/public
-cp -r ../deps/grafana/public ./usr/share/grafana/public
-cp -r ../deps/grafana/tools ./usr/share/grafana/tools
-cp -r ../deps/grafana/conf ./usr/share/grafana/conf
-cp -r ../deps/grafana/scripts ./usr/share/grafana/scripts
+cp -r ../deps/grafana/public ./usr/share/grafana/
+cp -r ../deps/grafana/tools ./usr/share/grafana/
+cp -r ../deps/grafana/conf ./usr/share/grafana/
+cp -r ../deps/grafana/scripts ./usr/share/grafana/
 # -- percona-dashboards
 mkdir -p ./usr/share/percona-dashboards/panels/
-cp -r ../deps/grafana-dashboards/panels ./usr/share/percona-dashboards/panels/
+cp -r ../deps/grafana-dashboards/panels ./usr/share/percona-dashboards/
 mkdir -p ./usr/share/percona-dashboards/panels/pmm-app/dist
-cp -r ../deps/grafana-dashboards/pmm-app/dist ./usr/share/percona-dashboards/panels/pmm-app/dist
+cp -r ../deps/grafana-dashboards/pmm-app/dist ./usr/share/percona-dashboards/panels/pmm-app/
 
 # compress
 tar -I 'lz4 --fast' -cf ../x-grafana-fe-$TAG.tar.lz4 ./

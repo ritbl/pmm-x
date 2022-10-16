@@ -9,10 +9,15 @@ clone() {
   local branch=$3
 
   if [[ ! -d $target_dir ]];then
-    git clone --depth=1 $repo "$target_dir" --branch $branch
+    # --depth=1 -- causes issues with version generation
+    #  pmm-agent -v
+    #     #ProjectName: pmm-agent
+    #     #Version: a71ad8  <---- it will fail to connect to pmm
+    #     #PMMVersion: a71ad8 <---- it will fail to connect to pmm
+    git clone $repo "$target_dir" --branch $branch
   fi
 }
 
-clone "pmm" "https://github.com/percona/pmm.git" "PMM-10600-add-mongodb-edition-datapoint"
+clone "pmm" "https://github.com/percona/pmm.git" "main"
 clone "dbaas-controller" "https://github.com/percona-platform/dbaas-controller.git" "main"
 clone "qan-api2" "https://github.com/percona/qan-api2.git" "main"
