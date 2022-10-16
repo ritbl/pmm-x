@@ -15,7 +15,7 @@ services:
     profiles:
       - be-pack
     image: ubuntu:22.04
-    container_name: be-pack
+    container_name: x-grafana-be-pack
     entrypoint: [ "sh", "-c", "/build/build-be-pack.sh" ]
     volumes:
       - "./:/build"
@@ -33,7 +33,7 @@ services:
     profiles:
       - fe-pack
     image: ubuntu:22.04
-    container_name: fe-pack
+    container_name: x-grafana-fe-pack
     entrypoint: [ "sh", "-c", "/build/build-fe-pack.sh" ]
     volumes:
       - "./:/build"

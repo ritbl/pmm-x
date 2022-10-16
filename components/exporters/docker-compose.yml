@@ -1,0 +1,21 @@
+---
+version: '3.9'
+services:
+  be:
+    profiles:
+      - be-build
+    image: golang:1.19.2-buster
+    container_name: x-exporters-be-build
+    entrypoint: [ "sh", "-c", "/build/build-be.sh" ]
+    volumes:
+      - "./:/build"
+  be-pack:
+    env_file:
+      - .env
+    profiles:
+      - be-pack
+    image: ubuntu:22.04
+    container_name: x-exporters-be-pack
+    entrypoint: [ "sh", "-c", "/build/build-be-pack.sh" ]
+    volumes:
+      - "./:/build"

@@ -17,6 +17,9 @@ build-x-grafana-fe:
 build-x-grafana-be:
 	make -C components/grafana build-be
 
+build-x-exporters-be:
+	make -C components/exporters build-be
+
 
 # ---- OLD
 #
