@@ -20,6 +20,9 @@ build-x-grafana-be:
 build-x-exporters-be:
 	make -C components/exporters build-be
 
+build-x-core-be:
+	make -C components/core build-be
+
 
 # ---- OLD
 #
