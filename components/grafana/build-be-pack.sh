@@ -17,9 +17,9 @@ if [ -d ./deps/grafana/bin/linux-arm64 ]; then
   cd pack-arm64
   mkdir -p ./usr/sbin
   cp -r ./../deps/grafana/bin/linux-arm64/grafana-server ./usr/sbin/grafana-server
+  cd ..
 
-  tar -I 'lz4 --fast' -cf x-grafana-be-arm64-$TAG.tar.lz4 ./*
-  mv x-grafana-be-arm64-$TAG.tar.lz4 ../
+  tar -I 'lz4 --fast' -cf ../x-grafana-be-arm64-$TAG.tar.lz4 ./pack-arm64/
 fi
 
 if [ -d ./deps/grafana/bin/linux-amd64 ]; then
@@ -28,7 +28,7 @@ if [ -d ./deps/grafana/bin/linux-amd64 ]; then
   cd pack-amd64
   mkdir -p ./usr/sbin
   cp -r ./../deps/grafana/bin/linux-amd64/grafana-server ./usr/sbin/grafana-server
+  cd ..
 
-  tar -I 'lz4 --fast' -cf x-grafana-be-amd64-$TAG.tar.lz4 ./*
-  mv x-grafana-be-amd64-$TAG.tar.lz4 ../
+  tar -I 'lz4 --fast' -cf ../x-grafana-be-amd64-$TAG.tar.lz4 ./pack-amd64/
 fi

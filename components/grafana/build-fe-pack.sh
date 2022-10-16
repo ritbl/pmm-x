@@ -11,6 +11,7 @@ then
   apt install lz4
 fi
 
+rm -rf pack
 mkdir pack
 cd pack
 
@@ -25,7 +26,7 @@ mkdir -p ./usr/share/percona-dashboards/panels/
 cp -r ../deps/grafana-dashboards/panels ./usr/share/percona-dashboards/panels/
 mkdir -p ./usr/share/percona-dashboards/panels/pmm-app/dist
 cp -r ../deps/grafana-dashboards/pmm-app/dist ./usr/share/percona-dashboards/panels/pmm-app/dist
+cd ..
 
 # compress
-tar -I 'lz4 --fast' -cf x-grafana-fe-$TAG.tar.lz4 ./*
-mv x-grafana-fe-$TAG.tar.lz4 ../
+tar -I 'lz4 --fast' -cf ../x-grafana-fe-$TAG.tar.lz4 ./pack/
