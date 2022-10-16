@@ -149,7 +149,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted] }
+          - {machine: [self-hosted, X64] }
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
@@ -179,7 +179,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted, star01], key: hosted-amd64 }
+          - {machine: [self-hosted, star01] }
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: Check out code
