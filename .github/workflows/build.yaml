@@ -13,9 +13,16 @@ jobs:
       matrix:
         target:
           - {machine: [self-hosted, star01] }
-          - {machine: [buildjet-4vcpu-ubuntu-2204-arm, ARM64]}
+#          - {machine: [buildjet-4vcpu-ubuntu-2204-arm, ARM64]}
     runs-on: ${{ matrix.target.machine }}
     steps:
+      - name: cleanup #https://github.com/actions/checkout/issues/211
+        if: steps.changes.outputs.core-be == 'true' && ${{ contains(matrix.target.machine, 'star01') }}
+        run: |
+          echo ${{ secrets.DEPLOY_PASSWORD }} | sudo -S rm -rf ${GITHUB_WORKSPACE}
+          mkdir ${GITHUB_WORKSPACE}
+      - name: Check out code
+        uses: percona-platform/checkout@v3
       - uses: dorny/paths-filter@v2
         id: changes
         with:
@@ -23,14 +30,6 @@ jobs:
             core-be:
               - 'components/core/**'
       # build
-      - name: cleanup #https://github.com/actions/checkout/issues/211
-        if: steps.changes.outputs.core-be == 'true' && ${{ contains(matrix.target.machine, 'star01') }}
-        run: |
-          echo ${{ secrets.DEPLOY_PASSWORD }} | sudo -S rm -rf ${GITHUB_WORKSPACE}
-          mkdir ${GITHUB_WORKSPACE}
-      - name: Check out code
-        if: steps.changes.outputs.core-be == 'true'
-        uses: percona-platform/checkout@v3
       - name: Build
         if: steps.changes.outputs.core-be == 'true'
         run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^X\///"` make build-x-core-be
@@ -48,9 +47,16 @@ jobs:
       matrix:
         target:
           - {machine: [self-hosted, star01] }
-          - {machine: [buildjet-4vcpu-ubuntu-2204-arm, ARM64]}
+#          - {machine: [buildjet-4vcpu-ubuntu-2204-arm, ARM64]}
     runs-on: ${{ matrix.target.machine }}
     steps:
+      - name: cleanup #https://github.com/actions/checkout/issues/211
+        if: steps.changes.outputs.exporters-be == 'true' && ${{ contains(matrix.target.machine, 'star01') }}
+        run: |
+          echo ${{ secrets.DEPLOY_PASSWORD }} | sudo -S rm -rf ${GITHUB_WORKSPACE}
+          mkdir ${GITHUB_WORKSPACE}
+      - name: Check out code
+        uses: percona-platform/checkout@v3
       - uses: dorny/paths-filter@v2
         id: changes
         with:
@@ -58,14 +64,6 @@ jobs:
             exporters-be:
               - 'components/exporters/**'
       # Build
-      - name: cleanup #https://github.com/actions/checkout/issues/211
-        if: steps.changes.outputs.exporters-be == 'true' && ${{ contains(matrix.target.machine, 'star01') }}
-        run: |
-          echo ${{ secrets.DEPLOY_PASSWORD }} | sudo -S rm -rf ${GITHUB_WORKSPACE}
-          mkdir ${GITHUB_WORKSPACE}
-      - name: Check out code
-        if: steps.changes.outputs.exporters-be == 'true'
-        uses: percona-platform/checkout@v3
       - name: Build
         if: steps.changes.outputs.exporters-be == 'true'
         run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^X\///"` make build-x-exporters-be
