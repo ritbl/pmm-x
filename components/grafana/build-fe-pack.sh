@@ -27,4 +27,5 @@ mkdir -p ./usr/share/percona-dashboards/panels/pmm-app/dist
 cp -r ../deps/grafana-dashboards/pmm-app/dist ./usr/share/percona-dashboards/panels/pmm-app/dist
 
 # compress
-tar -I 'lz4 --fast' -cf x-grafana-fe-$TAG.tar.lz4 ./
+tar -I 'lz4 --fast' -cf x-grafana-fe-$TAG.tar.lz4 ./*
+mv x-grafana-fe-$TAG.tar.lz4 ../
