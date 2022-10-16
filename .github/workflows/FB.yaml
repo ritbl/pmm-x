@@ -17,7 +17,7 @@ jobs:
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
-        if: ${{ contains(matrix.target.machine, 'star01') }}
+        if: ${{ contains(matrix.target.machine, 'self-hosted') }}
         run: |
           echo ${{ secrets.DEPLOY_PASSWORD }} | sudo -S rm -rf ${GITHUB_WORKSPACE}
           mkdir ${GITHUB_WORKSPACE}
