@@ -9,7 +9,12 @@ clone() {
   local branch=$3
 
   if [[ ! -d $target_dir ]];then
-    git clone --depth=1 $repo "$target_dir" --branch $branch
+    # --depth=1 -- causes issues with version generation
+    #  pmm-agent -v
+    #     #ProjectName: pmm-agent
+    #     #Version: a71ad8  <---- it will fail to connect to pmm
+    #     #PMMVersion: a71ad8 <---- it will fail to connect to pmm
+    git clone $repo "$target_dir" --branch $branch
   fi
 }
 

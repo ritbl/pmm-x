@@ -8,7 +8,7 @@ enter-pack:
 
 unpack:
 	mkdir unpack
-	tar --lz4 -xvf x-exporters-be-arm64-latest.tar.lz4 -C ./unpack
+	tar --lz4 -xvf ./x-exporters-be-arm64-latest.tar.lz4 -C ./unpack
 
 # TODO: add TAG if not added
 build-be:
