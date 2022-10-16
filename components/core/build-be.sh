@@ -2,7 +2,7 @@
 set -o xtrace
 set -e
 
-echo "Building Exporters Backend"
+echo "Building Core Backend"
 cd /build
 
 cd ./deps/pmm
