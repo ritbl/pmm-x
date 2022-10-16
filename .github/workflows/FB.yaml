@@ -38,7 +38,7 @@ jobs:
       # build
       - name: Build
         if: steps.changes.outputs.core-be == 'true'
-        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make build-x-core-be
+        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-core-be
       - name: Upload to S3
         if: steps.changes.outputs.core-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -73,7 +73,7 @@ jobs:
       # Build
       - name: Build
         if: steps.changes.outputs.exporters-be == 'true'
-        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make build-x-exporters-be
+        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-exporters-be
       - name: Upload to S3
         if: steps.changes.outputs.exporters-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -106,7 +106,7 @@ jobs:
       # Build
       - name: Build
         if: steps.changes.outputs.grafana-fe == 'true'
-        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make build-x-grafana-fe
+        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-grafana-fe
       - name: Upload to S3
         if: steps.changes.outputs.grafana-fe == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -140,7 +140,7 @@ jobs:
               - 'components/grafana/**'
       - name: Build
         if: steps.changes.outputs.grafana-be == 'true'
-        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make build-x-grafana-be
+        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-grafana-be
       - name: Upload to S3
         if: steps.changes.outputs.grafana-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -178,7 +178,7 @@ jobs:
           password: ${{ secrets.DOCKER_PAT }}
       - name: Build
         if: steps.changes.outputs.foundation == 'true'
-        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make build-x-foundation
+        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-foundation
   pmm-x:
     needs: [core-be, exporters-be, grafana-fe, grafana-be, foundation]
     strategy:
@@ -200,4 +200,4 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
       - name: Build
-        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^FB\///"` make build-pmm-x
+        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-pmm-x
