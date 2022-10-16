@@ -32,20 +32,20 @@ if [[ $ARCH = "aarch64" ]]; then
 fi
 
 if [[ $ARCH = "x86_64" ]]; then
-    mkdir pack-amd64
-    cd pack-amd64
-    # -- azure_exporter
-    mkdir -p ./usr/local/percona/pmm2/exporters
-    cp ./../deps/azure_metrics_exporter/azure_metrics_exporter ./usr/local/percona/pmm2/exporters/azure_exporter
-    # -- mongodb_exporter
-    cp ./../deps/mongodb_exporter/mongodb_exporter ./usr/local/percona/pmm2/exporters/
-    # -- node_exporter
-    cp ./../deps/node_exporter/node_exporter ./usr/local/percona/pmm2/exporters/
-    # -- postgres_exporter
-    cp ./../deps/postgres_exporter/cmd/postgres_exporter/postgres_exporter ./usr/local/percona/pmm2/exporters/
-    # -- rds_exporter
-    cp ./../deps/rds_exporter/rds_exporter ./usr/local/percona/pmm2/exporters/
-    cd ..
+  mkdir pack-amd64
+  cd pack-amd64
+  # -- azure_exporter
+  mkdir -p ./usr/local/percona/pmm2/exporters
+  cp ./../deps/azure_metrics_exporter/azure_metrics_exporter ./usr/local/percona/pmm2/exporters/azure_exporter
+  # -- mongodb_exporter
+  cp ./../deps/mongodb_exporter/mongodb_exporter ./usr/local/percona/pmm2/exporters/
+  # -- node_exporter
+  cp ./../deps/node_exporter/node_exporter ./usr/local/percona/pmm2/exporters/
+  # -- postgres_exporter
+  cp ./../deps/postgres_exporter/cmd/postgres_exporter/postgres_exporter ./usr/local/percona/pmm2/exporters/
+  # -- rds_exporter
+  cp ./../deps/rds_exporter/rds_exporter ./usr/local/percona/pmm2/exporters/
+  cd ..
 
-    tar -I 'lz4 --fast' -cf x-exporters-be-amd64-$TAG.tar.lz4 pack-amd64/
+  tar -I 'lz4 --fast' -cf x-exporters-be-amd64-$TAG.tar.lz4 pack-amd64/
 fi
