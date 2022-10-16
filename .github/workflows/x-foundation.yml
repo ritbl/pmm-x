@@ -7,7 +7,7 @@ on:
     branches:
       - "X/**"
     paths:
-      - "components/grafana/**"
+      - "components/foundations/**"
 
 jobs:
   build:
