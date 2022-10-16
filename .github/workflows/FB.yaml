@@ -81,7 +81,7 @@ jobs:
       matrix:
         target:
           - {machine: [buildjet-8vcpu-ubuntu-2204]}
-          - {machine: [self-hosted]}
+#          - {machine: [self-hosted]}
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
