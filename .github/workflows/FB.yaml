@@ -3,7 +3,12 @@ name: Build FB
 on:
   ##  push:
   ##    branches: [ "main" ]
-  push:
+
+  # PR comment
+  issue_comment:
+    types: [created, deleted]
+  pull_request:
+    types: [opened, reopened]
     branches:
       - "FB/**"
 
