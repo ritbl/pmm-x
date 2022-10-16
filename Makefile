@@ -23,6 +23,8 @@ build-x-exporters-be:
 build-x-core-be:
 	make -C components/core build-be
 
+build-x-foundation:
+	make -C components/foundation build
 
 # ---- OLD
 #
