@@ -13,5 +13,5 @@ clone() {
   fi
 }
 
-clone "grafana" "https://github.com/percona-platform/grafana.git" "main"
-clone "grafana-dashboards" "https://github.com/percona/grafana-dashboards.git" "main"
+clone "VictoriaMetrics" "https://github.com/VictoriaMetrics/VictoriaMetrics.git" "pmm-6401-v1.77.1"
+clone "alertmanager" "https://github.com/prometheus/alertmanager.git" "main"

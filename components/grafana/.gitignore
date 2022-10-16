@@ -1,0 +1,4 @@
+deps
+pack**
+.env
+*.tar.lz4

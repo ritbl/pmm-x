@@ -1,0 +1,33 @@
+#name: X:Foundation Container Image
+#
+#on:
+##  push:
+##    branches: [ "main" ]
+#  push:
+#    branches:
+#      - "X/**"
+#    paths:
+#      - "components/foundations/**"
+#
+#jobs:
+#  build:
+#    strategy:
+#      matrix:
+#        target:
+#          - {machine: [self-hosted, star01] }
+#    runs-on: ${{ matrix.target.machine }}
+#    steps:
+#      - name: cleanup #https://github.com/actions/checkout/issues/211
+#        if: ${{ contains(matrix.target.machine, 'star01') }}
+#        run: |
+#          echo ${{ secrets.DEPLOY_PASSWORD }} | sudo -S rm -rf ${GITHUB_WORKSPACE}
+#          mkdir ${GITHUB_WORKSPACE}
+#      - name: Check out code
+#        uses: percona-platform/checkout@v3
+#      - name: Login to Docker Hub
+#        uses: docker/login-action@v2
+#        with:
+#          username: ${{ secrets.DOCKER_USER }}
+#          password: ${{ secrets.DOCKER_PAT }}
+#      - name: Build
+#        run: TAG=`echo "${{ github.ref_name }}" | sed -e "s/^X\///"` make build-x-foundation
