@@ -17,7 +17,7 @@ if [[ $ARCH = "aarch64" ]]; then
   cd pack-arm64
   mkdir -p ./usr/sbin
   # dbaas-controller
-  cp ./../deps/dbaas-controller/bin/dbaas-controller ./usr/sbin/dbaas-controller
+  cp ./../deps/dbaas-controller/bin/dbaas-controller/cmd/dbaas-controller ./usr/sbin/dbaas-controller
   # qan
   cp ./../deps/qan-api2/bin/qan-api2 ./usr/sbin/percona-qan-api2
   # pmm
@@ -37,7 +37,7 @@ if [[ $ARCH = "x86_64" ]]; then
   cd pack-amd64
   mkdir -p ./usr/sbin
   # dbaas-controller
-  cp ./../deps/dbaas-controller/bin/dbaas-controller ./usr/sbin/dbaas-controller
+  cp ./../deps/dbaas-controller/bin/dbaas-controller/cmd/dbaas-controller ./usr/sbin/dbaas-controller
   # qan
   cp ./../deps/qan-api2/bin/qan-api2 ./usr/sbin/percona-qan-api2
   # pmm
