@@ -6,7 +6,6 @@ export ARCH=`uname -m`
 echo "Packing Exporters [$ARCH]"
 cd /build
 
-
 if ! command -v lz4 &> /dev/null
 then
   apt update
