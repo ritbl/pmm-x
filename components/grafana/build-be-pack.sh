@@ -12,6 +12,7 @@ then
 fi
 
 if [ -d ./deps/grafana/bin/linux-arm64 ]; then
+  rm -rf pack-arm64
   mkdir pack-arm64
   cd pack-arm64
   mkdir -p ./usr/sbin
@@ -22,6 +23,7 @@ if [ -d ./deps/grafana/bin/linux-arm64 ]; then
 fi
 
 if [ -d ./deps/grafana/bin/linux-amd64 ]; then
+  rm -rf pack-amd64
   mkdir pack-amd64
   cd pack-amd64
   mkdir -p ./usr/sbin

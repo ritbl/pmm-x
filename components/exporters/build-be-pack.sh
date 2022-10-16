@@ -14,6 +14,7 @@ then
 fi
 
 if [[ $ARCH = "aarch64" ]]; then
+  rm -rf pack-arm64
   mkdir pack-arm64
   cd pack-arm64
   # -- azure_exporter
@@ -33,6 +34,7 @@ if [[ $ARCH = "aarch64" ]]; then
 fi
 
 if [[ $ARCH = "x86_64" ]]; then
+  rm -rf pack-amd64
   mkdir pack-amd64
   cd pack-amd64
   # -- azure_exporter
