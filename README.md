@@ -15,6 +15,7 @@ Container contains:
  - Grafana (Percona)
  - vmalert
  - alertmanager
+ - amtool
  - dbaas-controller
  - qan-api2
  - pmm-managed
