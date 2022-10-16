@@ -1,4 +1,6 @@
-FROM ritbl/pmm-x-foundation:0.0.1
+ARG X_FOUNDATION_TAG
+FROM ritbl/pmm-x-foundation:$X_FOUNDATION_TAG
+
 ARG TARGETARCH
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -10,40 +12,40 @@ RUN mkdir -p \
 # grafana
 RUN adduser grafana
 RUN mkdir -p /usr/share/grafana/data
-COPY ./raw/${TARGETARCH}/usr/share/grafana/public /usr/share/grafana/public
-COPY ./raw/${TARGETARCH}/usr/share/grafana/tools /usr/share/grafana/tools
-COPY ./raw/${TARGETARCH}/usr/sbin/grafana-server /usr/sbin/grafana-server
-COPY ./raw/${TARGETARCH}/usr/share/grafana/conf /usr/share/grafana/conf
-COPY ./raw/${TARGETARCH}/usr/share/grafana/conf /usr/share/grafana/scripts
+COPY ./deps/${TARGETARCH}/usr/share/grafana/public /usr/share/grafana/public
+COPY ./deps/${TARGETARCH}/usr/share/grafana/tools /usr/share/grafana/tools
+COPY ./deps/${TARGETARCH}/usr/sbin/grafana-server /usr/sbin/grafana-server
+COPY ./deps/${TARGETARCH}/usr/share/grafana/conf /usr/share/grafana/conf
+COPY ./deps/${TARGETARCH}/usr/share/grafana/conf /usr/share/grafana/scripts
 
-COPY  ./raw/${TARGETARCH}/usr/share/percona-dashboards/panels/ /usr/share/percona-dashboards/panels/
-COPY  ./raw/${TARGETARCH}/usr/share/percona-dashboards/panels/pmm-app/dist /usr/share/percona-dashboards/panels/pmm-app/dist
+COPY  ./deps/${TARGETARCH}/usr/share/percona-dashboards/panels/ /usr/share/percona-dashboards/panels/
+COPY  ./deps/${TARGETARCH}/usr/share/percona-dashboards/panels/pmm-app/dist /usr/share/percona-dashboards/panels/pmm-app/dist
 
 # dbaas-controller
-COPY ./raw/${TARGETARCH}/usr/sbin/dbaas-controller /usr/sbin/dbaas-controller
+COPY ./deps/${TARGETARCH}/usr/sbin/dbaas-controller /usr/sbin/dbaas-controller
 
 # qan
-COPY ./raw/${TARGETARCH}/usr/sbin/percona-qan-api2 /usr/sbin/percona-qan-api2
+COPY ./deps/${TARGETARCH}/usr/sbin/percona-qan-api2 /usr/sbin/percona-qan-api2
 
 # pmm
 # -- pmm-managed
-COPY ./raw/${TARGETARCH}/usr/sbin/pmm-managed /usr/sbin/pmm-managed
+COPY ./deps/${TARGETARCH}/usr/sbin/pmm-managed /usr/sbin/pmm-managed
 # -- pmm-agent
-COPY ./raw/${TARGETARCH}/usr/sbin/pmm-agent  /usr/sbin/pmm-agent
+COPY ./deps/${TARGETARCH}/usr/sbin/pmm-agent  /usr/sbin/pmm-agent
 # -- pmm-admin
-COPY ./raw/${TARGETARCH}/usr/sbin/pmm-admin  /usr/sbin/pmm-admin
+COPY ./deps/${TARGETARCH}/usr/sbin/pmm-admin  /usr/sbin/pmm-admin
 
 # exporters
 # -- azure_metrics_exporter -> azure_exporter
-COPY ./raw/${TARGETARCH}/usr/local/percona/pmm2/exporters/azure_exporter /usr/local/percona/pmm2/exporters/azure_exporter
+COPY ./deps/${TARGETARCH}/usr/local/percona/pmm2/exporters/azure_exporter /usr/local/percona/pmm2/exporters/azure_exporter
 # -- mongodb_exporter
-COPY ./raw/${TARGETARCH}/usr/local/percona/pmm2/exporters/ /usr/local/percona/pmm2/exporters/
+COPY ./deps/${TARGETARCH}/usr/local/percona/pmm2/exporters/ /usr/local/percona/pmm2/exporters/
 # -- node_exporter
-COPY ./raw/${TARGETARCH}/usr/local/percona/pmm2/exporters/ /usr/local/percona/pmm2/exporters/
+COPY ./deps/${TARGETARCH}/usr/local/percona/pmm2/exporters/ /usr/local/percona/pmm2/exporters/
 # -- postgres_exporter
-COPY ./raw/${TARGETARCH}/usr/local/percona/pmm2/exporters/ /usr/local/percona/pmm2/exporters/
+COPY ./deps/${TARGETARCH}/usr/local/percona/pmm2/exporters/ /usr/local/percona/pmm2/exporters/
 # -- rds_exporter
-COPY ./raw/${TARGETARCH}/usr/local/percona/pmm2/exporters/ /usr/local/percona/pmm2/exporters/
+COPY ./deps/${TARGETARCH}/usr/local/percona/pmm2/exporters/ /usr/local/percona/pmm2/exporters/
 
 EXPOSE 80
 
