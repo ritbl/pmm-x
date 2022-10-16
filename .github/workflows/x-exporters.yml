@@ -10,7 +10,7 @@ on:
       - "components/exporters/**"
 
 jobs:
-  exporters-be:
+  core-be:
     strategy:
       matrix:
         target:
