@@ -14,5 +14,5 @@ unpack:
 build-be:
 	./pull-repositories.sh
 	echo "TAG=$(TAG)" >> .env
-	#docker-compose --profile be-build up --force-recreate
+	docker-compose --profile be-build up --force-recreate
 	docker-compose --profile be-pack up --force-recreate
