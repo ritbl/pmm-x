@@ -29,4 +29,4 @@ cp -r ../deps/grafana-dashboards/pmm-app/dist ./usr/share/percona-dashboards/pan
 cd ..
 
 # compress
-tar -I 'lz4 --fast' -cf ../x-grafana-fe-$TAG.tar.lz4 ./pack/
+tar -I 'lz4 --fast' -cf ./x-grafana-fe-$TAG.tar.lz4 ./pack/

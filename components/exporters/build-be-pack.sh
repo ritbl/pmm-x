@@ -30,7 +30,7 @@ if [[ $ARCH = "aarch64" ]]; then
   cp ./../deps/rds_exporter/rds_exporter ./usr/local/percona/pmm2/exporters/
   cd ..
 
-  tar -I 'lz4 --fast' -cf ../x-exporters-be-arm64-$TAG.tar.lz4 ./pack-arm64/
+  tar -I 'lz4 --fast' -cf ./x-exporters-be-arm64-$TAG.tar.lz4 ./pack-arm64/
 fi
 
 if [[ $ARCH = "x86_64" ]]; then
@@ -50,5 +50,5 @@ if [[ $ARCH = "x86_64" ]]; then
   cp ./../deps/rds_exporter/rds_exporter ./usr/local/percona/pmm2/exporters/
   cd ..
 
-  tar -I 'lz4 --fast' -cf ../x-exporters-be-amd64-$TAG.tar.lz4 ./pack-amd64/
+  tar -I 'lz4 --fast' -cf ./x-exporters-be-amd64-$TAG.tar.lz4 ./pack-amd64/
 fi

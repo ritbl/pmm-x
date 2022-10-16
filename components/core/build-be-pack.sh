@@ -30,7 +30,7 @@ if [[ $ARCH = "aarch64" ]]; then
   cp ./../deps/pmm/bin/pmm-admin  ./usr/sbin/pmm-admin
   cd ..
 
-  tar -I 'lz4 --fast' -cf x-core-be-arm64-$TAG.tar.lz4 ./pack-arm64/
+  tar -I 'lz4 --fast' -cf ./x-core-be-arm64-$TAG.tar.lz4 ./pack-arm64/
 fi
 
 if [[ $ARCH = "x86_64" ]]; then
@@ -51,5 +51,5 @@ if [[ $ARCH = "x86_64" ]]; then
   cp ./../deps/pmm/bin/pmm-admin  ./usr/sbin/pmm-admin
   cd ..
 
-  tar -I 'lz4 --fast' -cf ../x-core-be-amd64-$TAG.tar.lz4 ./pack-amd64/
+  tar -I 'lz4 --fast' -cf ./x-core-be-amd64-$TAG.tar.lz4 ./pack-amd64/
 fi
