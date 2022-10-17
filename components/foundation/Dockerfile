@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y \
 
 # golang
 RUN wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash \
-         -s -- --version 1.19.2 # TODO: provide way to override \
+         -s -- --version 1.19.2 # TODO: provide way to override
 RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
 # clickhouse
