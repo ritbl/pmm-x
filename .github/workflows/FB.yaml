@@ -14,6 +14,7 @@ on:
 
 jobs:
   core-be:
+    timeout-minutes: 10
     strategy:
       matrix:
         target:
@@ -50,6 +51,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_KEY }}
           AWS_DEFAULT_REGION: "eu-central-1"
   exporters-be:
+    timeout-minutes: 10
     strategy:
       matrix:
         target:
@@ -86,6 +88,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_KEY }}
           AWS_DEFAULT_REGION: "eu-central-1"
   grafana-fe:
+    timeout-minutes: 15
     strategy:
       matrix:
         target:
@@ -120,6 +123,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_KEY }}
           AWS_DEFAULT_REGION: "eu-central-1"
   grafana-be:
+    timeout-minutes: 15
     strategy:
       matrix:
         target:
@@ -155,6 +159,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_KEY }}
           AWS_DEFAULT_REGION: "eu-central-1"
   foundation:
+    timeout-minutes: 15
     strategy:
       matrix:
         target:
@@ -191,6 +196,7 @@ jobs:
         if: steps.changes.outputs.foundation == 'true'
         run: TAG="${{ github.head_ref }}" make build-x-foundation
   pmm-x:
+    timeout-minutes: 15
     needs: [core-be, exporters-be, grafana-fe, grafana-be, foundation]
     strategy:
       matrix:
