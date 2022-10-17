@@ -6,7 +6,6 @@ It provides linux/ARM and linux/AMD64 container images.
 
 ## Components Included
 
-Container contains:
  - SupervisorD
  - PostgreSQL
  - Clickhouse
