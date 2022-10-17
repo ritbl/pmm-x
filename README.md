@@ -71,7 +71,7 @@ Update image in `docker-compose.yml`, for example
 ```
 
 
-### 3: Known issues
+### 3: Known issues:
 
 ### 3.1: make run-all in container fails with "nosplit stack over 792 byte limit"
 
