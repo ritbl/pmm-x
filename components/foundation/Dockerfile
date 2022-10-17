@@ -23,7 +23,12 @@ FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-        curl gnupg lz4 wget make vim
+        curl gnupg lz4 wget make vim git gcc
+
+# golang
+RUN wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash \
+         -s -- --version 1.19.2 # TODO: provide way to override \
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
 # clickhouse
 RUN apt-get install -y apt-transport-https ca-certificates dirmngr && \
