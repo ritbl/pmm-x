@@ -39,7 +39,7 @@ jobs:
       # build
       - name: Build
         if: steps.changes.outputs.core-be == 'true'
-        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-core-be
+        run: TAG="${{ github.head_ref }}" make build-x-core-be
       - name: Upload to S3
         if: steps.changes.outputs.core-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -75,7 +75,7 @@ jobs:
       # Build
       - name: Build
         if: steps.changes.outputs.exporters-be == 'true'
-        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-exporters-be
+        run: TAG="${{ github.head_ref }}" make build-x-exporters-be
       - name: Upload to S3
         if: steps.changes.outputs.exporters-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -109,7 +109,7 @@ jobs:
       # Build
       - name: Build
         if: steps.changes.outputs.grafana-fe == 'true'
-        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-grafana-fe
+        run: TAG="${{ github.head_ref }}" make build-x-grafana-fe
       - name: Upload to S3
         if: steps.changes.outputs.grafana-fe == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -144,7 +144,7 @@ jobs:
               - 'components/grafana/**'
       - name: Build
         if: steps.changes.outputs.grafana-be == 'true'
-        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-grafana-be
+        run: TAG="${{ github.head_ref }}" make build-x-grafana-be
       - name: Upload to S3
         if: steps.changes.outputs.grafana-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -189,7 +189,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
       - name: Build
         if: steps.changes.outputs.foundation == 'true'
-        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-foundation
+        run: TAG="${{ github.head_ref }}" make build-x-foundation
   pmm-x:
     needs: [core-be, exporters-be, grafana-fe, grafana-be, foundation]
     strategy:
@@ -218,4 +218,4 @@ jobs:
       - name: Set up Docker BuildX
         uses: docker/setup-buildx-action@v2
       - name: Build
-        run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-pmm-x
+        run: TAG="${{ github.head_ref }}" make build-pmm-x
