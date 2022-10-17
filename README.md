@@ -2,7 +2,9 @@
 
 Custom PMM build with focus on simplicity and performance.
 
-It provides native aarch64 and AMD64 (coming soon) container images, so that you can run them with full speed on M1/M2 or linux machine! 
+It provides native aarch64 and AMD64 container images, so that you can run them with full speed on M1/M2 or linux machine!
+
+On top of that you will be able to debug you golang app working on mac@arm!
 
 ## Components Included
 
