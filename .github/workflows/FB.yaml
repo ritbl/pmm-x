@@ -159,7 +159,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_KEY }}
           AWS_DEFAULT_REGION: "eu-central-1"
   foundation:
-    timeout-minutes: 15
+    timeout-minutes: 25
     strategy:
       matrix:
         target:
