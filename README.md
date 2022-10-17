@@ -100,3 +100,34 @@ So that run task will look like this:
 release-dev:
 	go build -gcflags="all=-N -l" -v $(PMM_LD_FLAGS) -o $(PMM_RELEASE_PATH)/ ./cmd/...
 ```
+
+### 3.2: ClickHouse on Apple Silicon
+Clickhouse has limited functionality on aarch64. DBaaS will fail when it tries to connect to local (native aarch64) instance.
+To Fix it you need to create AMD64 container.
+
+In `docker-compose.yml` add service:
+
+```yaml
+  ch:
+    image: clickhouse/clickhouse-server:22.6.9.11-alpine
+    platform: linux/amd64
+    ports:
+      - "9000:9000"
+```
+
+And configure `pmm-managed` to use it:
+
+```yaml
+  pmm-managed-server:
+....
+    environment:
+...
+      - PERCONA_TEST_PMM_CLICKHOUSE_ADDR=ch:9000
+      - PERCONA_TEST_PMM_CLICKHOUSE_DATABASE=pmm
+      - PERCONA_TEST_PMM_CLICKHOUSE_BLOCK_SIZE=10000
+      - PERCONA_TEST_PMM_CLICKHOUSE_POOL_SIZE=2
+...
+```
+
+Note: host in connection string `ch:9000` is name of the service you added on previous step.
+
