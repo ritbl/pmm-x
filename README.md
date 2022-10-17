@@ -2,9 +2,7 @@
 
 Custom PMM build with focus on simplicity and performance.
 
-It provides native aarch64 and AMD64 container images, so that you can run them with full speed on M1/M2 or linux machine!
-
-On top of that you will be able to debug you golang app working on mac@arm!
+It provides linux/ARM and linux/AMD64 container images.
 
 ## Components Included
 
@@ -31,13 +29,9 @@ Container contains:
    - azure_metrics_exporter (Percona)
    - rds_exporter (Percona)
 
-## Docker 
-
-Configure docker to use buildx, build and push image.
-
 ## How to use it
 
-### 1: PMM development:
+### 1: PMM development
 
 Update docker-compose.yml
 
@@ -53,7 +47,7 @@ image: ritbl/pmm-x:<tag>
 
 where tag can be found [here](https://hub.docker.com/repository/registry-1.docker.io/ritbl/pmm-x/tags?page=1&ordering=last_updated) 
 
-### 2: Feature Build
+### 2: How to create a Feature Build
 
 ### branch from version build
 
@@ -73,7 +67,7 @@ Update image in `docker-compose.yml`, for example
 ```
 
 
-### 3: Known issues:
+### 3: Known issues
 
 ### 3.1: make run-all in container fails with "nosplit stack over 792 byte limit"
 
