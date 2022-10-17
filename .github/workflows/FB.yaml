@@ -5,8 +5,8 @@ on:
   ##    branches: [ "main" ]
 
   # PR comment
-  issue_comment:
-    types: [created, deleted]
+  #issue_comment:
+  #  types: [created, deleted]
   pull_request:
     types: [opened, reopened]
     branches:
