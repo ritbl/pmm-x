@@ -9,8 +9,8 @@ on:
   #  types: [created, deleted]
   pull_request:
     types: [opened, reopened]
-    branches:
-      - "FB/**"
+  #  branches:
+  #    - "FB/**"
 
 jobs:
   core-be:
