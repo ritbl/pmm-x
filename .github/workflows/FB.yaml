@@ -181,6 +181,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PAT }}
+      - name: Set up Docker BuildX
+        uses: docker/setup-buildx-action@v2
       - name: Build
         if: steps.changes.outputs.foundation == 'true'
         run: TAG=`echo "${{ github.head_ref }}" | sed -e "s/^FB\///"` make build-x-foundation

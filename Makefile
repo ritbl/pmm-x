@@ -28,7 +28,7 @@ build-x-foundation:
 	make -C components/foundation build
 
 build-pmm-x:
-	BUILDX_BUILDER=buildx docker buildx build --push --platform=linux/amd64,linux/arm64 --tag=ritbl/pmm-x:$(TAG) \
+	docker buildx build --push --platform=linux/amd64,linux/arm64 --tag=ritbl/pmm-x:$(TAG) \
 		--build-arg X_FOUNDATION_TAG=$(X_FOUNDATION_TAG) \
 		--build-arg X_GRAFANA_TAG=$(X_GRAFANA_TAG) \
 		--build-arg X_CORE_TAG=$(X_CORE_TAG) \
