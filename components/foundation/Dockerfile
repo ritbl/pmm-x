@@ -26,9 +26,10 @@ RUN apt-get update && apt-get install -y \
         curl gnupg lz4 wget make vim git gcc
 
 # golang
+# TODO: provide way to override go version
 RUN wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash \
-         -s -- --version 1.19.2 # TODO: provide way to override
-RUN go install github.com/go-delve/delve/cmd/dlv@latest
+         -s -- --version 1.19.2
+RUN  . /root/.bashrc && go install github.com/go-delve/delve/cmd/dlv@latest
 
 # clickhouse
 RUN apt-get install -y apt-transport-https ca-certificates dirmngr && \
