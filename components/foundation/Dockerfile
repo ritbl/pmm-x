@@ -23,7 +23,10 @@ FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-        curl gnupg lz4 wget make vim git gcc
+        curl gnupg lz4 wget make vim git gcc zsh
+
+RUN wget -q -O - https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash \
+         -s -- --unattended
 
 # golang
 # TODO: provide way to override go version
