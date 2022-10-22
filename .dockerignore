@@ -1,2 +1,4 @@
-**/.git
-!deps/pmm/.git
+.idea
+.git
+.github
+components

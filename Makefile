@@ -34,3 +34,11 @@ build-pmm-x:
 		--build-arg X_CORE_TAG=$(X_CORE_TAG) \
 		--build-arg X_EXPORTERS_TAG=$(X_EXPORTERS_TAG) \
 		.
+
+build-pmm-x-local:
+	docker build --tag=ritbl/pmm-x:dev \
+		--build-arg X_FOUNDATION_TAG=$(X_FOUNDATION_TAG) \
+		--build-arg X_GRAFANA_TAG=$(X_GRAFANA_TAG) \
+		--build-arg X_CORE_TAG=$(X_CORE_TAG) \
+		--build-arg X_EXPORTERS_TAG=$(X_EXPORTERS_TAG) \
+		.

@@ -18,3 +18,5 @@ if [[ $ARCH = "x86_64" ]]; then
   wget -c https://pmm-x.s3.eu-central-1.amazonaws.com/x-grafana-fe-$X_GRAFANA_TAG.tar.lz4 -O - | tar -I "lz4" -xv -C /
   wget -c https://pmm-x.s3.eu-central-1.amazonaws.com/x-grafana-be-amd64-$X_GRAFANA_TAG.tar.lz4 -O - | tar -I "lz4" -xv -C /
 fi
+
+sed -i "s/app_mode = production/app_mode = development/" /usr/share/grafana/conf/defaults.ini
