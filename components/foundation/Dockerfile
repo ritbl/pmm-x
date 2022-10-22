@@ -23,18 +23,13 @@ FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-        curl gnupg lz4 wget make vim git gcc zsh htop
-
-RUN wget -q -O - https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash \
-         -s -- --unattended
-
-RUN chsh -s /bin/zsh
+        curl gnupg lz4 wget make vim git gcc htop
 
 # golang
 # TODO: provide way to override go version
 RUN wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash \
          -s -- --version 1.19.2
-RUN  /root/.go/bin/go install github.com/go-delve/delve/cmd/dlv@latest # TODO: .zshrc is not applied, so `go` is not available
+RUN  . /root/.bashrc && go install github.com/go-delve/delve/cmd/dlv@latest
 
 # clickhouse
 RUN apt-get install -y apt-transport-https ca-certificates dirmngr && \
