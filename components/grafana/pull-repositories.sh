@@ -13,5 +13,5 @@ clone() {
   fi
 }
 
-clone "grafana" "https://github.com/percona-platform/grafana.git" "main"
+clone "grafana" "https://github.com/percona-platform/grafana.git" "PMM-10466-ui-events"
 clone "grafana-dashboards" "https://github.com/percona/grafana-dashboards.git" "main"
