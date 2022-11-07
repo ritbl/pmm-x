@@ -19,6 +19,7 @@ if [ ! -f $DIST_FILE ]; then
     su postgres -c "/usr/lib/postgresql/14/bin/pg_ctl start -D /srv/postgres14"
     su postgres -c "psql postgres postgres -c 'CREATE EXTENSION pg_stat_statements SCHEMA public'"
     su postgres -c "/usr/lib/postgresql/14/bin/pg_ctl stop -D /srv/postgres14"
+    /dev-setup.sh
 fi
 
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
