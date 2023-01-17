@@ -9,7 +9,7 @@ clone() {
   local branch=$3
 
   if [[ ! -d $target_dir ]];then
-    git clone --depth=1 $repo "$target_dir" --branch $branch
+    git clone --depth=1 $repo "$target_dir" --branch $branch --ipv4
   fi
 }
 

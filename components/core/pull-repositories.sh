@@ -14,7 +14,7 @@ clone() {
     #     #ProjectName: pmm-agent
     #     #Version: a71ad8  <---- it will fail to connect to pmm
     #     #PMMVersion: a71ad8 <---- it will fail to connect to pmm
-    git clone $repo "$target_dir" --branch $branch
+    git clone $repo "$target_dir" --branch $branch --ipv4
   fi
 }
 
