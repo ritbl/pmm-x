@@ -18,6 +18,6 @@ clone() {
   fi
 }
 
-clone "pmm" "https://github.com/percona/pmm.git" "main"
+clone "pmm" "https://github.com/percona/pmm.git" "v2.33.0"
 clone "dbaas-controller" "https://github.com/percona-platform/dbaas-controller.git" "main"
 clone "qan-api2" "https://github.com/percona/qan-api2.git" "main"
