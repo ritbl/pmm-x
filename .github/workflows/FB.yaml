@@ -55,7 +55,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted, X64] }
+#1          - {machine: [self-hosted, X64] }
 #          - {machine: [self-hosted, ARM64] }
 #          - { machine: [ buildjet-2vcpu-ubuntu-2204, X64 ] }
 #1          - { machine: [ buildjet-4vcpu-ubuntu-2204-arm, ARM64 ] }
@@ -92,7 +92,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted]}
+#1          - {machine: [self-hosted]}
 #          - { machine: [ buildjet-4vcpu-ubuntu-2204, X64 ] }
     runs-on: ${{ matrix.target.machine }}
     steps:
@@ -127,7 +127,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted, X64] }
+#1          - {machine: [self-hosted, X64] }
 #          - {machine: [self-hosted, ARM64] }
 #          - { machine: [ buildjet-2vcpu-ubuntu-2204, X64 ] }
 #1          - { machine: [ buildjet-4vcpu-ubuntu-2204-arm, ARM64 ] }
@@ -163,7 +163,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted, X64] }
+#1          - {machine: [self-hosted, X64] }
 #          - { machine: [ buildjet-4vcpu-ubuntu-2204, X64 ] }
     runs-on: ${{ matrix.target.machine }}
     steps:
@@ -201,7 +201,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - {machine: [self-hosted] }
+#1          - {machine: [self-hosted] }
 #          - { machine: [ buildjet-4vcpu-ubuntu-2204, X64 ] }
     runs-on: ${{ matrix.target.machine }}
     steps:
