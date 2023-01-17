@@ -10,7 +10,7 @@ make init release
 cd -
 
 # dbaas-controller
-cd ./deps/dbaas-controller
+cd ./deps/bin/dbaas-controller
 make release
 cd -
 
