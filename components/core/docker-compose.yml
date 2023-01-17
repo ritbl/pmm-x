@@ -4,7 +4,7 @@ services:
   be:
     profiles:
       - be-build
-    image: golang:1.19.2-buster
+    image: golang:1.19.5-buster
     container_name: x-core-be-build
     entrypoint: [ "sh", "-c", "/build/build-be.sh" ]
     volumes:

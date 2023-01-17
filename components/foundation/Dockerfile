@@ -1,4 +1,4 @@
-FROM golang:1.19.2-buster as back-builder
+FROM golang:1.19.5-buster as back-builder
 
 RUN apt install -y gcc g++ make
 
@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y \
 # golang
 # TODO: provide way to override go version
 RUN wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash \
-         -s -- --version 1.19.2
+         -s -- --version 1.19.5
 RUN  . /root/.bashrc && go install github.com/go-delve/delve/cmd/dlv@latest
 
 # clickhouse
