@@ -21,7 +21,7 @@ jobs:
           - {machine: [self-hosted, X64] }
 #          - {machine: [self-hosted, ARM64] }
 #          - {machine: [buildjet-2vcpu-ubuntu-2204, X64]}
-          - {machine: [buildjet-4vcpu-ubuntu-2204-arm, ARM64]}
+#1          - {machine: [buildjet-4vcpu-ubuntu-2204-arm, ARM64]}
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
@@ -58,7 +58,7 @@ jobs:
           - {machine: [self-hosted, X64] }
 #          - {machine: [self-hosted, ARM64] }
 #          - { machine: [ buildjet-2vcpu-ubuntu-2204, X64 ] }
-          - { machine: [ buildjet-4vcpu-ubuntu-2204-arm, ARM64 ] }
+#1          - { machine: [ buildjet-4vcpu-ubuntu-2204-arm, ARM64 ] }
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
@@ -130,7 +130,7 @@ jobs:
           - {machine: [self-hosted, X64] }
 #          - {machine: [self-hosted, ARM64] }
 #          - { machine: [ buildjet-2vcpu-ubuntu-2204, X64 ] }
-          - { machine: [ buildjet-4vcpu-ubuntu-2204-arm, ARM64 ] }
+#1          - { machine: [ buildjet-4vcpu-ubuntu-2204-arm, ARM64 ] }
     runs-on: ${{ matrix.target.machine }}
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
