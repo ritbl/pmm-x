@@ -9,6 +9,9 @@ services:
     entrypoint: [ "sh", "-c", "/build/build-be.sh" ]
     volumes:
       - "./:/build"
+      # caching
+      - go-modules:/root/go/pkg/mod
+      - root-cache:/root/.cache
   be-pack:
     env_file:
       - .env
@@ -19,3 +22,9 @@ services:
     entrypoint: [ "sh", "-c", "/build/build-be-pack.sh" ]
     volumes:
       - "./:/build"
+      # caching
+      - go-modules:/root/go/pkg/mod
+      - root-cache:/root/.cache
+volumes:
+  go-modules:
+  root-cache:
