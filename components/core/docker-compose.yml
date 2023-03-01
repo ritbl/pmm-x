@@ -4,7 +4,7 @@ services:
   be:
     profiles:
       - be-build
-    image: golang:1.19.5-bullseye
+    image: golang:1.20.1-bullseye
     container_name: x-core-be-build
     entrypoint: [ "sh", "-c", "/build/build-be.sh" ]
     volumes:
