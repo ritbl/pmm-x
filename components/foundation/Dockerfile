@@ -1,4 +1,4 @@
-FROM golang:1.20.1-bullseye as back-builder
+FROM golang:1.19.6-bullseye as back-builder
 
 RUN apt install -y gcc g++ make
 
