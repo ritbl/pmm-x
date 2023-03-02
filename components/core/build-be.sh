@@ -7,6 +7,7 @@ cd /build
 
 # fixes build issue on jetbuild
 #go env -w GOFLAGS="-buildvcs=false"
+git config --global safe.directory '*'
 
 cd ./deps/pmm
 make init release
