@@ -40,9 +40,7 @@ jobs:
       # build
       - name: Build
         if: steps.changes.outputs.core-be == 'true'
-        run: |
-          git config --global safe.directory '*'  
-          TAG="${{ github.head_ref }}" make build-x-core-be
+        run: TAG="${{ github.head_ref }}" make build-x-core-be
       - name: Upload to S3
         if: steps.changes.outputs.core-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
