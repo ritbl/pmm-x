@@ -79,6 +79,9 @@ jobs:
             exporters-be:
               - 'components/exporters/**'
       # Build
+      - name: ENV
+        if: steps.changes.outputs.exporters-be == 'true'
+        run: printenv
       - name: Build
         if: steps.changes.outputs.exporters-be == 'true'
         run: TAG="${{ github.head_ref }}" make build-x-exporters-be
