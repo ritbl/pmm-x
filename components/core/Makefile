@@ -12,6 +12,9 @@ unpack:
 
 # TODO: add TAG if not added
 build-be:
+	rm -rf ./deps
+	rm -rf ./pack
+	rm *.tar.lz4
 	./pull-repositories.sh
 	echo "TAG=$(TAG)" >> .env
 	docker-compose --profile be-build up --force-recreate
