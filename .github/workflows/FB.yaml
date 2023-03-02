@@ -41,6 +41,8 @@ jobs:
       - name: Build
         if: steps.changes.outputs.core-be == 'true'
         run: TAG="${{ github.head_ref }}" make build-x-core-be
+        env:
+          X_FIX_GIT_ACCESS=1
       - name: Upload to S3
         if: steps.changes.outputs.core-be == 'true'
         uses: ritbl/gha-aws@v1.0.1

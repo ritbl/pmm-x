@@ -5,8 +5,10 @@ set -e
 echo "Building Core Backend"
 cd /build
 
-#TODO: we need to run only in context of CI
-git config --global safe.directory '*'
+if [ x"${X_FIX_GIT_ACCESS}" == "1" ]; then
+  echo "Fixing git access"
+  git config --global safe.directory '*'
+fi
 
 cd ./deps/pmm
 make init release
