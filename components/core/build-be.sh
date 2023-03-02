@@ -6,7 +6,7 @@ echo "Building Core Backend"
 cd /build
 
 # fixes build issue on jetbuild
-go env -w GOFLAGS="-buildvcs=false"
+#go env -w GOFLAGS="-buildvcs=false"
 
 cd ./deps/pmm
 make init release
