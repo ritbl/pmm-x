@@ -8,6 +8,8 @@ cd /build
 if [ x"${X_FIX_GIT_ACCESS}" == "1" ]; then
   echo "Fixing git access"
   git config --global safe.directory '*'
+else
+  echo "Skipping fixing git access"
 fi
 
 cd ./deps/pmm
