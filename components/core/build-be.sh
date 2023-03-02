@@ -5,6 +5,7 @@ set -e
 echo "Building Core Backend"
 cd /build
 
+#TODO: we need to run only in context of CI
 git config --global safe.directory '*'
 
 cd ./deps/pmm
