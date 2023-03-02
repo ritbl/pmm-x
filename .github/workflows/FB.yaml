@@ -23,8 +23,6 @@ jobs:
           - {machine: [buildjet-2vcpu-ubuntu-2204, X64]}
           - {machine: [buildjet-4vcpu-ubuntu-2204-arm, ARM64]}
     runs-on: ${{ matrix.target.machine }}
-    env:
-      GOFLAGS: "-buildvcs=false"
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
         if: ${{ contains(matrix.target.machine, 'self-hosted') }}
@@ -43,6 +41,8 @@ jobs:
       - name: Build
         if: steps.changes.outputs.core-be == 'true'
         run: TAG="${{ github.head_ref }}" make build-x-core-be
+        env:
+          GOFLAGS: "-buildvcs=false"
       - name: Upload to S3
         if: steps.changes.outputs.core-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -62,8 +62,6 @@ jobs:
           - { machine: [ buildjet-2vcpu-ubuntu-2204, X64 ] }
           - { machine: [ buildjet-4vcpu-ubuntu-2204-arm, ARM64 ] }
     runs-on: ${{ matrix.target.machine }}
-    env:
-      GOFLAGS: "-buildvcs=false"
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
         if: ${{ contains(matrix.target.machine, 'self-hosted') }}
@@ -79,12 +77,11 @@ jobs:
             exporters-be:
               - 'components/exporters/**'
       # Build
-      - name: ENV
-        if: steps.changes.outputs.exporters-be == 'true'
-        run: printenv
       - name: Build
         if: steps.changes.outputs.exporters-be == 'true'
         run: TAG="${{ github.head_ref }}" make build-x-exporters-be
+        env:
+          GOFLAGS: "-buildvcs=false"
       - name: Upload to S3
         if: steps.changes.outputs.exporters-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -139,8 +136,6 @@ jobs:
           - { machine: [ buildjet-2vcpu-ubuntu-2204, X64 ] }
           - { machine: [ buildjet-4vcpu-ubuntu-2204-arm, ARM64 ] }
     runs-on: ${{ matrix.target.machine }}
-    env:
-      GOFLAGS: "-buildvcs=false"
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
         if: ${{ contains(matrix.target.machine, 'self-hosted') }}
@@ -158,6 +153,8 @@ jobs:
       - name: Build
         if: steps.changes.outputs.grafana-be == 'true'
         run: TAG="${{ github.head_ref }}" make build-x-grafana-be
+        env:
+          GOFLAGS: "-buildvcs=false"
       - name: Upload to S3
         if: steps.changes.outputs.grafana-be == 'true'
         uses: ritbl/gha-aws@v1.0.1
@@ -175,8 +172,6 @@ jobs:
 #          - {machine: [self-hosted, X64] }
           - { machine: [ buildjet-4vcpu-ubuntu-2204, X64 ] }
     runs-on: ${{ matrix.target.machine }}
-    env:
-      GOFLAGS: "-buildvcs=false"
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
         if: ${{ contains(matrix.target.machine, 'self-hosted') }}
@@ -206,6 +201,8 @@ jobs:
       - name: Build
         if: steps.changes.outputs.foundation == 'true'
         run: TAG="${{ github.head_ref }}" make build-x-foundation
+        env:
+          GOFLAGS: "-buildvcs=false"
   pmm-x:
     timeout-minutes: 30
     needs: [core-be, exporters-be, grafana-fe, grafana-be, foundation]
@@ -215,8 +212,6 @@ jobs:
 #          - {machine: [self-hosted] }
           - { machine: [ buildjet-4vcpu-ubuntu-2204, X64 ] }
     runs-on: ${{ matrix.target.machine }}
-    env:
-      GOFLAGS: "-buildvcs=false"
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
         if: ${{ contains(matrix.target.machine, 'self-hosted') }}
@@ -239,3 +234,5 @@ jobs:
       - name: Build
         if: ${{ !startsWith(github.head_ref, 'foundation-') }}
         run: TAG="${{ github.head_ref }}" make build-pmm-x
+        env:
+          GOFLAGS: "-buildvcs=false"
