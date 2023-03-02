@@ -10,6 +10,9 @@ cd ./deps/azure_metrics_exporter
 go build
 cd -
 
+# fixes build issue on jetbuild
+go env -w GOFLAGS="-buildvcs=false"
+
 ## -- mongodb_exporter
 cd ./deps/mongodb_exporter
 go build
