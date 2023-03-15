@@ -5,6 +5,8 @@ set -e
 echo "Building Exporters Backend"
 cd /build
 
+go env -w GOFLAGS="-buildvcs=false"
+
 ## -- azure_exporter
 cd ./deps/azure_metrics_exporter
 go build
